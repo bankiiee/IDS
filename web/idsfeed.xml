@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>ทดสอบการประกาศข่าวสารทาง Feed RSS</title>
+        <description>IDS System</description>
+        <link>http://www.google.com</link>
+        <lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>
+        <pubDate>Mon, 06 Sep 2010 00:01:00 +0000 </pubDate>
+        <item>
+            <title>ข่าวทดสอบที่ ๑</title>
+            <description>ข่าวทดสอบที่ ๑</description>
+            <link>http://www.google.com</link>
+            <guid>Read This</guid>
+            <pubDate>Mon, 06 Sep 2010 00:01:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>ข่าวทดสอบที่ ๒</title>
+            <description>ข่าวทดสอบที่ ๒</description>
+            <link>http://www.google.com</link>
+            <guid>Read This</guid>
+            <pubDate>Mon, 06 Sep 2010 00:01:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>ข่าวทดสอบที่ 3</title>
+            <description>ข่าวทดสอบที่ 3</description>
+            <link>http://www.google.com</link>
+            <guid>Read This</guid>
+            <pubDate>Mon, 06 Sep 2010 00:01:00 +0000</pubDate>
+        </item>
+    </channel>
+</rss>

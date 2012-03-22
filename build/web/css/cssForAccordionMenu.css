@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.AccordionTitle, .AccordionContent, .AccordionContainer
+{
+  position:relative;
+  width:200px;
+}
+
+.AccordionTitle
+{
+  height:20px;
+  overflow:hidden;
+  cursor:pointer;
+  font-family:Arial;
+  font-size:8pt;
+  font-weight:bold;
+  vertical-align:middle;
+  text-align:center;
+  background-repeat:repeat-x;
+  display:table-cell;
+ /* background-image:url('title_repeater.jpg');*/
+  background-color:#FF0;
+  -moz-user-select:none;
+}
+
+.AccordionContent
+{
+  height:0px;
+  overflow:auto;
+  display:none; 
+}
+
+.AccordionContainer
+{
+  border-top: solid 1px #C1C1C1;
+  border-bottom: solid 1px #C1C1C1;
+  border-left: solid 2px #C1C1C1;
+  border-right: solid 2px #C1C1C1;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" 
+        xmlns:rim="http://www.blackberry.com/ns/widgets" 
+		version="1.0.0.1" id="dev828">
+
+	<name> DEV828 </name>
+	<description> Lab: Intro to BlackBerry WebWorks </description>
+	<author rim:copyright="2011"> Your Name Here </author>
+
+	<content src="index.html" />
+	<icon src="icon.png"/>
+	
+	<access subdomains="true" uri="*"/>
+	
+	<!-- Supported by both Smartphone and Tablet: -->
+	<feature id="blackberry.invoke" required="true" version="1.0.0.0" /> 
+	<feature id="blackberry.app.event" required="true" version="1.0.0.0"/>
+	<!-- Supported on Smartphone only: -->
+	<feature id="blackberry.ui.menu" required="true" version="1.0.0.0"/>
+	<feature id="blackberry.invoke.MapsArguments" required="true" version="1.0.0.0" /> 
+	<!-- Supported on Tablet OS only: -->
+
+</widget>
