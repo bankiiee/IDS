@@ -1,5 +1,6 @@
 <% String ct = this.getServletContext().getContextPath();%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : main
     Created on : Aug 25, 2011, 8:06:15 PM
@@ -12,8 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>IDS | Admin | ${firstname}</title>
-     <link href="<%=ct%>/css/cssForMainPage.css" rel="stylesheet" type="text/css">
-        <link href="<%=ct%>/css/pepper-grinder/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+        <link href="<%=ct%>/css/cssForMainPage.css" rel="stylesheet" type="text/css">
+        <link href="<%=ct%>/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
         <script src="<%=ct%>/scripts/cufon-yui.js" type="text/javascript"></script>
         <script src="<%=ct%>/scripts/ChunkFive_400.font.js" type="text/javascript"></script>
         <script type="text/javascript" src="<%=ct%>/scripts/jquery-1.6.2.js"></script>
@@ -34,6 +35,12 @@
         <link rel="stylesheet" href="<%=ct%>/css/demo_page.css" type="text/css" media="screen" />
         <script type="text/javascript" src="<%=ct%>/scripts/jquery.dataTables.js"></script>
 <!--        <script type="text/javascript" src="<%=ct%>/scripts/live.js"></script>-->
+        <script src="<%=ct%>/scripts/modernizr-transitions.js"></script>
+        <script src="<%=ct%>/scripts/jquery.masonry.min.js"></script>
+
+        <script src="<%=ct%>/scripts/jquery.tweet.js"></script>
+        <link rel="stylesheet" href="<%=ct%>/css/jquery.tweet.css" type="text/css" media="screen" />
+
 
         <script>
            
@@ -51,10 +58,25 @@
             
                 //document.getElementById("datetime").innerHTML = "Today is "+monthday+"/"+monthnumber+"/"+year+", and It's now "+hour+":"+minute+":"+second;
        
+       
+                $(".tweet").tweet({
+                    username: "rcksht",
+                    join_text: "-",
+                    avatar_size: 32,
+                    count: 3,
+                    auto_join_text_default: "we said,",
+                    auto_join_text_ed: "we",
+                    auto_join_text_ing: "we were",
+                    auto_join_text_reply: "we replied to",
+                    auto_join_text_url: "we were checking out",
+                    loading_text: "loading tweets..."
+                });
             } );
             
         </script>
-
+        <sql:query var="result" dataSource="db">
+            SELECT * from newstype
+        </sql:query>
 
 
     </head>
@@ -71,24 +93,32 @@
                     </c:otherwise>
                 </c:choose>
 
-                <div class="logo-header" ><a href="main.jsp"> <img src="images/ids_logo.png" width="80" height="100" alt="IDS System"></img></a></div>
+                <div class="logo-header">
+                    <a href="main.jsp"> <img src="<%=ct%>/images/ids_logo.png" width="150" height="150" alt="IDS System"></img></a><br>
+                </div>
+                <div id="datetime">
+                </div>
                 <div class="header">
                     <div></div><br>
                     <div class="header-user">
+
 <!--                        <center>Welcome, ${username}</center>-->
 
                     </div>
                 </div>
 
-                <div class="navBar">
+                <div class="navBar" style="margin-top: 20px;">
                     <div id="accordion">
                         <h3><a href="">ข่าวสาร</a></h3>
                         <div>
-                            <ul>
-                                <li><a href="main.jsp">ข่าวการเรียนการสอน</a></li>
-                                <li><a href="main.jsp?v=1">ข่าวรับสมัครงาน ฝึกงาน แนะแนว</a></li>
-                                <li><a href="main.jsp?v=2">ข่าวทุนการศึกษา</a></li>
-                                <li><a href="main.jsp?v=3">ข่าวประชาสัมพันธ์</a></li>
+                            <ul><c:forEach var="item" items="${result.rows}">
+                                    <li><a href="main.jsp?v=1&pri=${item.id}">${item.name}</a></li>
+                                </c:forEach>
+                                <!--                                <li><a href="main.jsp?v=1&pri=1">ข่าวการเรียนการสอน</a></li>
+                                                                <li><a href="main.jsp?v=1&pri=2">ข่าวรับสมัครงาน ฝึกงาน แนะแนว</a></li>
+                                                                <li><a href="main.jsp?v=1&pri=3">ข่าวทุนการศึกษา</a></li>
+                                                                <li><a href="main.jsp?v=1&pri=4">ข่าวประชาสัมพันธ์</a></li>
+                                                                <li><a href="main.jsp?v=1&pri=0">ข่าวในหมวดอื่นๆ</a></li>-->
                             </ul>
                         </div>
                         <h3><a href="#">จัดการข่าวสาร</a></h3>
@@ -101,44 +131,45 @@
                             </ul>
                         </div>
                         <c:if test="${isAdmin == true}">
+
+                            <h3><a href="##">จัดการผู้ใช้</a></h3>
+                            <div>
+                                <ul>
+
+                                    <li><a href="main.jsp?v=80##">ค้นหาและแก้ไขบัญชีผู้ใช้</a></li>
+                                    <li><a href="main.jsp?v=81##">สร้างบัญชีผู้จัดการระบบ</a></li>
+                                    <li><a href="main.jsp?v=82##">แก้ไขบัญชีผู้จัดการระบบ</a></li>
+                                </ul>
+
+                            </div>
+                            <!--                        <h3><a href="">จัดการแบบประเมิน</a></h3>
+                                                    <div>
+                                                        <ul>
+                                                            <li><a href="">สร้างแบบประเมิน</a></li>
+                                                            <li><a href="">แก้ไขแบบประเมิน</a></li>
+                                                            <li><a href="">สรุปผลแบบประเมิน</a></li>
+                                                            <li><a href="">ค้นหาแบบประเมิน</a></li>
                             
-                        <h3><a href="#">จัดการผู้ใช้</a></h3>
-                        <div>
-                            <ul>
-
-                                <li><a href="main.jsp?v=80">ค้นหาและแก้ไขบัญชีผู้ใช้</a></li>
-                                <li><a href="main.jsp?v=81">สร้างบัญชีผู้จัดการระบบ</a></li>
-                                <li><a href="main.jsp?v=82">แก้ไขบัญชีผู้จัดการระบบ</a></li>
-                            </ul>
-
-                        </div>
-<!--                        <h3><a href="">จัดการแบบประเมิน</a></h3>
-                        <div>
-                            <ul>
-                                <li><a href="">สร้างแบบประเมิน</a></li>
-                                <li><a href="">แก้ไขแบบประเมิน</a></li>
-                                <li><a href="">สรุปผลแบบประเมิน</a></li>
-                                <li><a href="">ค้นหาแบบประเมิน</a></li>
-
-                            </ul>
-                        </div>-->
-                        <!--                        <h3><a href="#">จัดการรายงานและเอกสาร</a></h3>
-                                                <div>
-                                                    <ul>
-                                                        <li><a href="">สร้างรายงาน</a></li>
-                                                        <li><a href="">แก้ไขรายงาน</a></li>
-                                                        <li><a href="">ค้นหารายงาน</a></li>
-                                                        <li><a href="">ส่งออกรายงาน</a></li>
-                                                    </ul>
-                                                </div>-->
+                                                        </ul>
+                                                    </div>-->
+                            <!--                        <h3><a href="#">จัดการรายงานและเอกสาร</a></h3>
+                                                    <div>
+                                                        <ul>
+                                                            <li><a href="">สร้างรายงาน</a></li>
+                                                            <li><a href="">แก้ไขรายงาน</a></li>
+                                                            <li><a href="">ค้นหารายงาน</a></li>
+                                                            <li><a href="">ส่งออกรายงาน</a></li>
+                                                        </ul>
+                                                    </div>-->
 
 
                         </c:if>
 
                     </div>
-
+                    <br>
+                    <div class="tweet" style="margin-top: 10px;"></div>
                 </div>
-                <div class="container">
+                <div class="">
                     <div id="search-bar">
 
                     </div>
@@ -150,7 +181,22 @@
                                                                 </select>-->
 
 
-                  <c:choose>
+                    <c:choose>
+                        <c:when test="${param.v == 1}">
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 2}">
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 3}">
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
                         <c:when test="${param.v == 80}">
                             <span class="container">
                                 <jsp:include page="manageUser.jsp"/>
@@ -162,21 +208,22 @@
                             </span>
                         </c:when>
                         <c:when test="${param.insert == 'true'}">
-                          <script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');
-                              </script>
+                            <script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');
+                                window.location.href = 'main.jsp?v=82##';
+                            </script>
                         </c:when>
                         <c:when test="${param.v == 110}">
-                        <span class="container">
+                            <span class="container">
                                 <jsp:include page="userUpdateProfile.jsp"/>
                             </span>
                         </c:when>
-                          <c:when test="${param.v == 111}">
-                        <span class="container">
+                        <c:when test="${param.v == 111}">
+                            <span class="container">
                                 <jsp:include page="adminEditProfile.jsp"/>
                             </span>
                         </c:when>
                         <c:when test="${param.v == 82}">
-                        <span class="container">
+                            <span class="container">
                                 <jsp:include page="adminUpdateProfile.jsp"/>
                             </span>
                         </c:when>
@@ -201,15 +248,17 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <span><center><h1>ข่าวสารทั่วไป (ช่วงทดสอบระบบ)</h1></center></span>
 
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
                             <%--<jsp:include page="newsInbox.jsp"></jsp:include> --%>
 
-                            <div class="RSSAggrCont" rssnum="10" rss_url="../idsfeed.xml">
-                                <div class="loading_rss">
-                                    <img alt="Loading..." src="images/loading.gif" />
-                                </div>
-                            </div>
+                            <!--                            <div class="RSSAggrCont" rssnum="10" rss_url="../idsfeed.xml">
+                                                            <div class="loading_rss">
+                                                                <img alt="Loading..." src="images/loading.gif" />
+                                                            </div>
+                                                        </div>-->
 
 
 
@@ -224,10 +273,10 @@
                 <c:redirect url="../login.jsp"/>
             </c:otherwise>
         </c:choose>
-                <div id="footer">
-            <jsp:include page="../footer.jsp"/>
+        <div id="footer">
+            <%--  <jsp:include page="../footer.jsp"/> --%>
         </div>
-                
+
         <script type="text/javascript">
             function doLogout(){
                         

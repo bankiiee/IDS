@@ -1,6 +1,6 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<% String ct = this.getServletContext().getContextPath(); %>
 <%-- 
     Document   : userUpdateProfile.jsp
     Created on : Sep 5, 2011, 11:05:50 PM
@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
+<link href="<%=ct%>/css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
 <sql:query var="result" dataSource="db">
     SELECT* FROM user where id = '${param.id}'
 </sql:query>

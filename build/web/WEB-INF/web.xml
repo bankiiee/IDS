@@ -132,17 +132,18 @@
         <servlet-name>userUpdateProfileServlet</servlet-name>
         <servlet-class>com.ids.servlets.userUpdateProfileServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>deleteUserServlet</servlet-name>
         <servlet-class>com.ids.servlets.deleteUserServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>manageUserServlet</servlet-name>
         <servlet-class>com.ids.servlets.manageUserServlet</servlet-class>
     </servlet>
-    
-    
+    <servlet>
+        <servlet-name>updateNewsServlet</servlet-name>
+        <servlet-class>com.ids.servlets.updateNewsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -279,7 +280,10 @@
         <servlet-name>manageUserServlet</servlet-name>
         <url-pattern>/manageUserServlet</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>updateNewsServlet</servlet-name>
+        <url-pattern>/updateNewsServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

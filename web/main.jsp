@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : main
     Created on : Aug 25, 2011, 8:06:15 PM
@@ -12,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>IDS | Student | ${firstname}</title>
         <link href="css/cssForMainPage.css" rel="stylesheet" type="text/css">
-        <link href="css/pepper-grinder/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+        <link href="css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
         <script src="scripts/cufon-yui.js" type="text/javascript"></script>
         <script src="scripts/ChunkFive_400.font.js" type="text/javascript"></script>
         <script type="text/javascript" src="scripts/jquery-1.6.2.js"></script>
@@ -35,7 +36,8 @@
         <link rel="stylesheet" href="css/demo_page.css" type="text/css" media="screen" />
         <script type="text/javascript" src="scripts/jquery.dataTables.js"></script>
         <!--         <script type="text/javascript" src="scripts/live.js"></script>-->
-
+ <script src="scripts/modernizr-transitions.js"></script>
+        <script src="scripts/jquery.masonry.min.js"></script>
 
         <script>
             $(function(){
@@ -69,7 +71,9 @@
             
         </script>
 
-
+  <sql:query var="result" dataSource="db">
+            SELECT * from newstype
+        </sql:query>
 
     </head>
     <body><div>
@@ -91,7 +95,7 @@
                 </c:choose>
 
                 <div class="logo-header">
-                    <a href="main.jsp"> <img src="images/ids_logo.png" width="80" height="100" alt="IDS System"></img></a><br>
+                    <a href="main.jsp"> <img src="images/ids_logo.png" width="150" height="150" alt="IDS System"></img></a><br>
                 </div>
                                          <div id="datetime">
                   </div>
@@ -108,13 +112,14 @@
                     <div id="accordion">
                         <h3><a href="#">ข่าวสาร</a></h3>
                         <div>
-                            <ul>
-                                <li><a href="main.jsp">ข่าวการเรียนการสอน</a></li>
-                                <li><a href="main.jsp?v=1">ข่าวรับสมัครงาน ฝึกงาน แนะแนว</a></li>
-                                <li><a href="main.jsp?v=2">ข่าวทุนการศึกษา</a></li>
-                                <li><a href="main.jsp?v=3">ข่าวประชาสัมพันธ์</a></li>
-
-
+                            <ul><c:forEach var="item" items="${result.rows}">
+                                    <li><a href="main.jsp?v=1&pri=${item.id}">${item.name}</a></li>
+                                </c:forEach>
+<!--                                <li><a href="main.jsp?v=1&pri=1">ข่าวการเรียนการสอน</a></li>
+                                <li><a href="main.jsp?v=1&pri=2">ข่าวรับสมัครงาน ฝึกงาน แนะแนว</a></li>
+                                <li><a href="main.jsp?v=1&pri=3">ข่าวทุนการศึกษา</a></li>
+                                <li><a href="main.jsp?v=1&pri=4">ข่าวประชาสัมพันธ์</a></li>
+                                <li><a href="main.jsp?v=1&pri=0">ข่าวในหมวดอื่นๆ</a></li>-->
                             </ul>
                         </div>
                         <!--                        <h3><a href="##">กล่องข้อความ</a></h3>
@@ -170,6 +175,21 @@
 
                     <c:choose>
                         <c:when test="${param.v == 1}">
+                           <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 2}">
+                           <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 3}">
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 30}">
 
                             <div>
                                 <jsp:include page="newsPage1.jsp"/>
@@ -199,14 +219,12 @@
                             </script>
                         </c:when>
                         <c:otherwise>
-                            <span><center><h1>ข่าวสารทั่วไป (ช่วงทดสอบระบบ)</h1></center></span>
+                          
 
                             <%--<jsp:include page="newsInbox.jsp"></jsp:include> --%>
 
-                            <div class="RSSAggrCont" rssnum="10" rss_url="idsfeed.xml">
-                                <div class="loading_rss">
-                                    <img alt="Loading..." src="images/loading.gif" />
-                                </div>
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
                             </div>
 
 

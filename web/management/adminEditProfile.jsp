@@ -1,5 +1,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String ct = this.getServletContext().getContextPath(); %>
+
 <%-- 
     Document   : adminEditProfile
     Created on : Mar 13, 2012, 2:33:11 PM
@@ -8,7 +10,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
+<link href="<%=ct%>/css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
 
 <sql:query var="result" dataSource="db">
     SELECT * FROM admin where id = '${param.id}'
@@ -18,7 +20,8 @@
     <c:forEach var="item" items="${result.rows}">
 
         <div class="content">
-            <div id="form_wrapper" class="form_wrapper">					
+            
+            <div id="form_wrapper" class="form_wrapper">	
                 <form class="login active" name ="updateForm" action="/IDS/adminUpdateProfileServlet" method="GET">
                     <center><h3><br>
                             <input type="radio" name="mode" id="modeview" value="view" onchange ="checkmode('view')" checked="checked"/>ดูข้อมูล

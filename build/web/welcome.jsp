@@ -17,6 +17,14 @@
 	</script>
 
     </head>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=225348954190713";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
     <body>
         
@@ -25,6 +33,12 @@
             <div class="header">
                 <a href="#" >Feedback</a>
                 <div class="header" id="header-label">Welcome to IDS Application</div>
+                                    <div class="fb-like" data-send="true" data-width="450" data-show-faces="true" data-font="segoe ui"></div>
+
+                                    
+                                   
+
+                                    
                 <!-- end .header -->
             </div>
             <div class="content">

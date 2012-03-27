@@ -9,8 +9,8 @@ package com.ids.model;
  * @author Servlets
  */
 public class News {
+    private String publisher;
     private int newsid;
-    private int userid;
     private String headline;
     private String story;
     private String fromdate;
@@ -19,14 +19,15 @@ public class News {
     private int forusergroupid;
     private int newstypeid;
     private int mediaid;
-    private String attatchment;
+    private String attchpath;
     private String status;
+    private int priorityid;
 
     /**
      * @return the userid
      */
     public News(News n){
-        this.userid = n.getUserid();
+        this.publisher = n.getPublisher();
         this.headline = n.getHeadline();
      
         this.story = n.getStory();
@@ -37,7 +38,8 @@ public class News {
         this.newstypeid = n.getNewstypeid();
         this.mediaid = n.getMediaid();
         this.status = n.getStatus();
-        this.attatchment = n.getAttatchment();
+        this.attchpath = n.getAttchpath();
+        this.priorityid = n.getPriorityid();
                 
     }
 
@@ -45,16 +47,12 @@ public class News {
        
     }
     
-    public int getUserid() {
-        return userid;
-    }
+  
 
     /**
      * @param userid the userid to set
      */
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
+   
 
     /**
      * @return the headline
@@ -171,16 +169,7 @@ public class News {
     /**
      * @return the attatchment
      */
-    public String getAttatchment() {
-        return attatchment;
-    }
-
-    /**
-     * @param attatchment the attatchment to set
-     */
-    public void setAttatchment(String attatchment) {
-        this.attatchment = attatchment;
-    }
+  
 
     /**
      * @return the status
@@ -208,6 +197,53 @@ public class News {
      */
     public void setNewsid(int newsid) {
         this.newsid = newsid;
+    }
+
+    /**
+     * @return the attatchmentid
+     */
+   
+
+    /**
+     * @return the priorityid
+     */
+    public int getPriorityid() {
+        return priorityid;
+    }
+
+    /**
+     * @param priorityid the priorityid to set
+     */
+    public void setPriorityid(int priorityid) {
+        this.priorityid = priorityid;
+    }
+
+    /**
+     * @return the publisher
+     */
+    public String getPublisher() {
+        return publisher;
+    }
+
+    /**
+     * @param publisher the publisher to set
+     */
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    /**
+     * @return the attchpath
+     */
+    public String getAttchpath() {
+        return attchpath;
+    }
+
+    /**
+     * @param attchpath the attchpath to set
+     */
+    public void setAttchpath(String attchpath) {
+        this.attchpath = attchpath;
     }
     
     

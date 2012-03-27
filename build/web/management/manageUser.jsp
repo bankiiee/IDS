@@ -8,12 +8,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<div style="margin-top: 50px;">
+    
 <div class ="wrapper"  >
     <sql:query var="result" dataSource="db">
         SELECT *  from user;
     </sql:query>
-
-    <form action="/IDS/deleteUserServlet" method="GET">
+        <h1> Admin Manage User</h1>
+    <form action="/IDS/deleteUserServlet" method="GET" class="login active">
         
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
             
@@ -57,6 +59,7 @@
         <center><input type="submit" name="remove" value="Remove Selected" /></center>
 
     </form>
+</div>
 </div>
 
 

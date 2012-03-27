@@ -28,8 +28,11 @@ public class addNewsServlet extends HttpServlet {
 
     public Connection conn;
 
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -45,7 +48,7 @@ public class addNewsServlet extends HttpServlet {
         try {
             News news = new News();
             int id = Integer.parseInt((String) session.getAttribute("id")); // userid for ids db only
-            System.out.println("USERID:"+id);
+            System.out.println("USERID:" + id);
             String headline = request.getParameter("headline").trim();
             String story = request.getParameter("story");
             String fromdate = request.getParameter("fromdate");
@@ -53,12 +56,16 @@ public class addNewsServlet extends HttpServlet {
             System.out.println((String) request.getParameter("forusergroupid"));
             int forusergroupid = Integer.parseInt((String) request.getParameter("forusergroupid"));
             int newstypeid = Integer.parseInt((String) request.getParameter("newstypeid"));
+            int edunewstypeid = Integer.parseInt(request.getParameter("edunewstypeid"));
+
             int mediaid = Integer.parseInt((String) request.getParameter("mediaid"));
             String attachment = request.getParameter("attachment");
+            String escape_attch = attachment.replace("%20", "_");
             String status = "inactive";
             String remark = request.getParameter("remark");
-      
-            news.setUserid(id);
+            int pid = Integer.parseInt(request.getParameter("priority"));
+
+            news.setPublisher(session.getAttribute("username").toString());
             news.setHeadline(headline);
             news.setStory(story);
             news.setFromdate(fromdate);
@@ -66,19 +73,26 @@ public class addNewsServlet extends HttpServlet {
             news.setForusergroupid(forusergroupid);
             news.setNewstypeid(newstypeid);
             news.setMediaid(mediaid);
-            news.setAttatchment(attachment);
+            news.setAttchpath(escape_attch);
             news.setStatus(status);
-            news.setRemark(remark);
-            
+            news.setRemark(remark + edunewstypeid);
+            news.setPriorityid(pid);
+
             boolean result = this.addNews(news);
             System.out.println(request.getRequestURL());
-            if(result){
-              //  response.sendRedirect(session.getAttribute("role")+"main.jsp?v=6");
-             RequestDispatcher rd =  request.getRequestDispatcher("GenXMLServlet?page=main.jsp&v=6");
-                rd.forward(request, response);
-              //  response.sendRedirect("GenXMLServlet?page=main.jsp&v=6");
-            }else{
-              //  response.sendRedirect(session.getAttribute("role")+"main.jsp?v=5&status=error");
+            if (result) {
+                if (session.getAttribute("role").equals("student")) {
+                    response.sendRedirect( "main.jsp?v=6");
+
+                } else {
+                    response.sendRedirect(session.getAttribute("role") + "/main.jsp?v=6");
+
+                }
+                //RequestDispatcher rd = request.getRequestDispatcher("GenXMLServlet?page=main.jsp&v=6");
+                //rd.forward(request, response);
+                //  response.sendRedirect("GenXMLServlet?page=main.jsp&v=6");
+            } else {
+                //  response.sendRedirect(session.getAttribute("role")+"main.jsp?v=5&status=error");
             }
 
         } finally {
@@ -89,11 +103,11 @@ public class addNewsServlet extends HttpServlet {
     public boolean addNews(News n) {
         boolean result = false;
         try {
-            String sql = "insert into news(userid, topic, story, fromdate, todate, forusergroupid,newstypeid,mediaid,attachment,status,remark) values(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into news(publisher, topic, story, fromdate, todate, forusergroupid,newstypeid,mediaid,attchpath,status,remark,priorityid) values(?,?,?,?,?,?,?,?,?,?,?,?)";
             System.out.println("Connection is null ?" + this.conn);
             PreparedStatement pstmt = this.conn.prepareStatement(sql);
 
-            pstmt.setInt(1, n.getUserid());
+            pstmt.setString(1, n.getPublisher());
             pstmt.setString(2, n.getHeadline());
             pstmt.setString(3, n.getStory());
             pstmt.setString(4, n.getFromdate());
@@ -101,31 +115,35 @@ public class addNewsServlet extends HttpServlet {
             pstmt.setInt(6, n.getForusergroupid());
             pstmt.setInt(7, n.getNewstypeid());
             pstmt.setInt(8, n.getMediaid());
-            pstmt.setString(9, n.getAttatchment());
+            pstmt.setString(9, n.getAttchpath());
             pstmt.setString(10, n.getStatus());
             pstmt.setString(11, n.getRemark());
-            System.out.println("Insert String:"+n.getHeadline());
+            pstmt.setInt(12, n.getPriorityid());
+
+            System.out.println("Insert String:" + n.getHeadline());
             int s = pstmt.executeUpdate();
             if (s != 0) {
                 System.out.println("Add News to DB Success!");
                 result = true;
-           
-                
+
+
             } else {
                 System.out.println("Failed!!!!!!!!!!!!!!!!!");
-                result =  false;
+                result = false;
             }
 
         } catch (SQLException ex) {
-            System.out.println("Error Msg:::"+ex.getMessage());
+            System.out.println("Error Msg:::" + ex.getMessage());
             Logger.getLogger(addNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-return result;
+        return result;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
+    /**
+     * Handles the HTTP
+     * <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -137,8 +155,10 @@ return result;
         processRequest(request, response);
     }
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -150,8 +170,9 @@ return result;
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

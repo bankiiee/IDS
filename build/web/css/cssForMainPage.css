@@ -56,11 +56,11 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 /* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
 .container {
 /*        border-style:groove;*/
-          margin-top: -50px;
+          margin-top: 0px;
          float: left;
-	width: 80%;
-	max-width: 800px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
-	min-width: 780px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
+	width: 90%;
+	max-width: 900px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
+	min-width: 600px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
         background: transparent;
 /*	margin: 0 auto;  the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
 }
@@ -82,7 +82,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 .navBar {
 	
 	float: left;
-	height: 200px;
+	height: 300px;
 	width: 200px;
 	padding:2px;
 	margin:5px;
@@ -94,13 +94,15 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 .logo-header{
     float:left;
-   margin-left: 60px;
+    margin-top: -30px;
+   margin-left: 30px;
     height: 100px;
-    width: 220px;
+    width: 200px;
     
 }
 .header-banner{
     float:left;
+    height: 200px;
     max-width: 800px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
     min-width: 200px;
 }
@@ -159,10 +161,30 @@ text-align: right;
 .container #search-bar{
     float:right;
     margin-top: -100px;
+}.container2{
+    width: auto;
 }
 .fromSlideShow{
     margin-top: -50px;
 }
 .for-slide-news{
     margin-top: 40px;
+}.newsthumb{
+    margin: 0pt auto;
+   
+    position: relative;
+}
+.newsthumb .newsDetail{
+    width: 300px;
+    height: auto;
+    float:left;
+    clear: right;
+    margin: 5pt auto;
+/*    background-color: white;*/
+    padding: 5px 5px 5px 5px;
+}
+.newsthumb ul li {
+    list-style-type: none;
+}.newsthumb ul{
+    padding: 4px 4px 4px 4px;
 }

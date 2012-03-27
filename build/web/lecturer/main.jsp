@@ -1,5 +1,6 @@
 <%String ct = this.getServletContext().getContextPath();%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : main
     Created on : Aug 25, 2011, 8:06:15 PM
@@ -12,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>IDS | Lecturer | ${firstname}</title>
         <link href="<%=ct%>/css/cssForMainPage.css" rel="stylesheet" type="text/css">
-        <link href="<%=ct%>/css/pepper-grinder/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+        <link href="<%=ct%>/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
         <script src="<%=ct%>/scripts/cufon-yui.js" type="text/javascript"></script>
         <script src="<%=ct%>/scripts/ChunkFive_400.font.js" type="text/javascript"></script>
         <script type="text/javascript" src="<%=ct%>/scripts/jquery-1.6.2.js"></script>
@@ -33,7 +34,8 @@
         <link rel="stylesheet" href="<%=ct%>/css/demo_page.css" type="text/css" media="screen" />
         <script type="text/javascript" src="<%=ct%>/scripts/jquery.dataTables.js"></script>
 <!--        <script type="text/javascript" src="<%=ct%>/scripts/live.js"></script>-->
-
+ <script src="<%=ct%>/scripts/modernizr-transitions.js"></script>
+        <script src="<%=ct%>/scripts/jquery.masonry.min.js"></script>
         <script>
            
             
@@ -52,6 +54,9 @@
             } );
             
         </script>
+        <sql:query var="result" dataSource="db">
+            SELECT * from newstype
+        </sql:query>
     </head>
     <body>
         <div>
@@ -67,7 +72,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <div class="logo-header" ><a href="main.jsp"> <img src="<%=ct%>/images/ids_logo.png" width="80" height="100" alt="IDS System"></img></a></div>
+                <div class="logo-header" ><a href="main.jsp"> <img src="<%=ct%>/images/ids_logo.png" width="150" height="150" alt="IDS System"></img></a></div>
                 <div class="header">
                     <div></div><br>
                     <div class="header-user">
@@ -75,16 +80,16 @@
                     </div>
                 </div>
 
-                <div class="navBar">
+                <div class="navBar" style="margin-top: 20px;">
                     <div id="accordion">
 
 
                         <h3><a href="">ข่าวสาร</a></h3>
                         <div>
-                            <ul>
-                                <li><a href="main.jsp?v=1">ข่าวการเรียนการสอน</a></li>
-                                <li><a href="main.jsp?v=2">ข่าวประกาศย้ายห้องเรียน ยกเลิกห้องเรียน</a></li>
-                                <li><a href="main.jsp?v=3">ข่าวประชาสัมพันธ์</a></li>
+                            <ul><c:forEach var="item" items="${result.rows}">
+                                    <li><a href="main.jsp?v=1&pri=${item.id}">${item.name}</a></li>
+                                </c:forEach>
+
                             </ul>
                         </div>
 
@@ -115,10 +120,10 @@
                 </div>
                 <div class="container">
 
-                    <div  id="checkIn" style="font-size: 20px;">
+                    <div  id="checkIn" style="font-size: 20px;margin-top: -50px;">
                         <c:choose>
                             <c:when test="${checkins == 'In-Office'}">
-                                <form action="<%=ct%>/DoCheckOutServlet" name="doCheckOut">
+                                <form action="<%=ct%>/DoCheckOutServlet" name="doCheckOut" >
                                     สถานะของคุณ : <label style="color: blue;">${applicationScope['checkins']}</label> | <input type="button" onClick="var ans = confirm('สถานะของคุณจะไม่เป็นที่มองเห็นอีกต่อไป ยินยอม ?');if(ans){document.forms['doCheckOut'].submit();}" name="checkout" value="Check-Out!"/>
                                     <input type="hidden" name="username" value="${userid}"/>
                                 </form>
@@ -135,6 +140,21 @@
 
                     <c:choose>
                         <c:when test="${param.v == 1}">
+                           <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 2}">
+                           <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 3}">
+                            <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 22}">
                             <div class="container">
                                 <jsp:include page="newsPage1.jsp"/>
                             </div>
@@ -157,14 +177,8 @@
                         </c:when>
                         <c:otherwise>
 
-                            <span><center><h1>ข่าวสารทั่วไป (ช่วงทดสอบระบบ)</h1></center></span>
-
-                            <%--<jsp:include page="newsInbox.jsp"></jsp:include> --%>
-
-                            <div class="RSSAggrCont" rssnum="10" rss_url="../idsfeed.xml">
-                                <div class="loading_rss">
-                                    <img alt="Loading..." src="images/loading.gif" />
-                                </div>
+                             <div class="container">
+                                <jsp:include page="feedTable.jsp"/>
                             </div>
 
 

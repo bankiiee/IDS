@@ -5,21 +5,25 @@
     Created on : Mar 12, 2012, 5:17:58 PM
     Author     : RcKShT
 --%>
+<% String ct = this.getServletContext().getContextPath(); %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
-<div class ="wrapper"  >
+<link href="<%=ct%>/css/cssForSendNews.css" rel="stylesheet" type="text/css">
+
+
+<div style="margin-top: 50px;">
+<div class ="form_wrapper" id="form_wrapper"  >
     <sql:query var="result" dataSource="db">
         SELECT *  from admin;
     </sql:query>
-
-    <form action="/IDS/insertAdminServlet" method="GET">
+        <h1> Add New Admin</h1>
+    <form action="/IDS/insertAdminServlet" method="GET" class="login active">
         
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-            <table border="0">
-                            <font style="color: RED;">(*)</font> เป็นข้อมูลที่จำเป็นที่ต้องกรอก
+        
+        <table border="0">
+            <h3>  <font style="color: RED;">(*)</font> เป็นข้อมูลที่จำเป็นที่ต้องกรอก</h3>
                             <tbody>
                                 <tr>
                                     <td><label>ชื่อ: <font style="color: RED">(*)</font></label>
@@ -45,6 +49,7 @@
     </form>
 </div>
 
+    </div>
 
         
 

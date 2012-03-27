@@ -13,6 +13,8 @@
         SELECT * from admin;
     </sql:query>
 
+        <div style="margin-top: 50px;">
+            <h1>Admin Manage Admin</h1>
     <form action="/IDS/deleteAdminServlet" method="GET">
         
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
@@ -58,4 +60,5 @@
         <center><input type="submit" name="remove" value="Remove Selected" /></center>
 
     </form>
+</div>
 </div>

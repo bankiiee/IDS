@@ -62,7 +62,7 @@ public class GenXMLServlet extends HttpServlet {
             while(rs.next()){
                 News n = new News();
                 n.setNewsid(rs.getInt(1));
-                n.setUserid(rs.getInt(2));
+                n.setPublisher(rs.getString(2));
                 n.setHeadline(rs.getString(3));
                 n.setStory(rs.getString(4));
                 n.setFromdate(rs.getString(5));
@@ -70,9 +70,10 @@ public class GenXMLServlet extends HttpServlet {
                 n.setForusergroupid(rs.getInt(7));
                 n.setNewstypeid(rs.getInt(8));
                 n.setMediaid(rs.getInt(9));
-                n.setAttatchment(rs.getString(10));
+                n.setAttchpath(rs.getString(10));
                 n.setStatus(rs.getString(11));
                 n.setRemark(rs.getString(12));
+                n.setPriorityid(rs.getInt(13));
                 list.add(n);
                 out.println(list.size());
                 out.println("Headline     " + rs.getString("topic"));

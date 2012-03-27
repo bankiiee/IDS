@@ -4,7 +4,7 @@ p{
     padding:5px 0px;
 }
 .wrapper{
-    font-family: Helvetica;
+    font-family: Roboto, Helvetica;
     width:960px;
     margin:20px auto;
     min-height:550px;
@@ -36,17 +36,17 @@ a.back{
     border:1px solid #ddd;
     /*	margin:0 auto;*/
     margin-left: 100px;
-    width:auto;
-    font-size:16px;
+    width:700px;
+    font-size:14px;
 /*    -moz-box-shadow:1px 1px 7px #ccc;
     -webkit-box-shadow:1px 1px 7px #ccc;*/
 /*    box-shadow:1px 1px 7px #ccc;*/
 }
 .form_wrapper h3{
     padding:10px 15px 10px 15px;
-    background-color:#eceadf;
-    color:darkslateblue;
-    font-size:18px;
+    background-color:#acdd4a;
+    color:green;
+    font-size:16px;
     border-bottom:1px solid #ddd;
     margin-top: -10px;
 }
@@ -63,7 +63,7 @@ form.active{
     display:block;
 }
 form.login{
-    width:700px;
+    width:auto;
 }
 form.register{
     width:650px;

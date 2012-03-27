@@ -72,7 +72,7 @@ public class OctetStreamReader extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        realPath = getServletContext().getRealPath(DESTINATION_DIR_PATH) + "\\";
+        realPath = getServletContext().getRealPath(DESTINATION_DIR_PATH) + "/";
     }
 
     /** 
@@ -97,13 +97,16 @@ public class OctetStreamReader extends HttpServlet {
         }
 
         String filename = request.getHeader("X-File-Name");
+        filename.trim();
         try {
             is = request.getInputStream();
             System.out.println("Realpath = "+realPath+filename);
-            fos = new FileOutputStream(new File(realPath +filename));
+            fos = new FileOutputStream(new File(realPath +filename.trim()));
             IOUtils.copy(is, fos);
+//                        response.setHeader("X-File-Name", filename);
             response.setStatus(response.SC_OK);
-            writer.print("{success: true}");
+      //      request.getSession().setAttribute("filename", filename);
+            writer.print("{success: true    }");
         } catch (FileNotFoundException ex) {
             response.setStatus(response.SC_INTERNAL_SERVER_ERROR);
             writer.print("{success: false}");
