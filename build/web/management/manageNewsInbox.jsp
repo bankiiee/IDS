@@ -21,7 +21,7 @@
     <h1>Manage News Inbox</h1>
 
     <sql:query var="result" dataSource="db">
-        SELECT id,publisher,topic,story,fromdate,todate,forusergroupid,newstypeid,mediaid,attchpath,status,priorityid,remark from news order by id desc;
+        SELECT id,publisher,topic,story,fromdate,todate,forusergroupid,newstypeid,mediaid,attchpath,status,priorityid,remark from news where status = 'inactive' order by id desc;
     </sql:query>
 
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">

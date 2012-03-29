@@ -126,6 +126,8 @@
                             <ul>
                                 <li><a href="main.jsp?v=5#">ประกาศข่าวสาร</a></li>
                                 <li><a href="main.jsp?v=6#">จัดการข่าวสารขาเข้า</a></li>
+                                <li><a href="main.jsp?v=8#">จัดการข่าวสารขาออก</a></li>
+                                 <li><a href="main.jsp?v=9#">ลบข่าวสาร</a></li>
                                 <li><a href="../GenXMLServlet?page=main.jsp&v=6">Generate XML Feed</a></li>
                                 <li><a href="main.jsp?v=7#">จัดการประเภทข่าวสาร กลุ่มผู้รับสาร และช่องทางการได้มาของข่าวสาร</a></li>
                             </ul>
@@ -242,9 +244,24 @@
                                 <jsp:include page="manageNewsType.jsp"/>
                             </div>
                         </c:when>
+                        <c:when test="${param.v == 8}">
+                            <div class="container">
+                                <jsp:include page="manageNewsOutBox.jsp"/>
+                            </div>
+                        </c:when>
+                             <c:when test="${param.v == 9}">
+                            <div class="container">
+                                <jsp:include page="deleteNews.jsp"/>
+                            </div>
+                        </c:when>
                         <c:when test="${param.v == 98}">
                             <div class="container">
                                 <a href="../GenXMLServlet?page=main.jsp&v=6"></a>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 'rm'}">
+                            <div class="container">
+                                <jsp:include page="readmoreNews.jsp"/>
                             </div>
                         </c:when>
                         <c:otherwise>

@@ -212,6 +212,11 @@
                                 <jsp:include page="lecturerList.jsp"/>
                             </div>
                         </c:when>
+                        <c:when test="${param.v == 'rm'}">
+                            <div class="container">
+                                <jsp:include page="readmoreNews.jsp"/>
+                            </div>
+                        </c:when>
                         <c:when test="${param.pupdate == 'success'}">
                             <script type="text/javascript">
                                 alert("ข้อมูลปรับปรุงเรียบร้อยแล้ว");

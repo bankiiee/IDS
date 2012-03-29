@@ -173,6 +173,11 @@
                                 <jsp:include page="lecturerViewProfile.jsp"/>
                             </div>
                         </c:when>
+                         <c:when test="${param.v == 'rm'}">
+                            <div class="container">
+                                <jsp:include page="readmoreNews.jsp"/>
+                            </div>
+                        </c:when>
                         <c:when test="">
                         </c:when>
                         <c:otherwise>

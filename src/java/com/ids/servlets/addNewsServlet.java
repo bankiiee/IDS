@@ -61,7 +61,15 @@ public class addNewsServlet extends HttpServlet {
             int mediaid = Integer.parseInt((String) request.getParameter("mediaid"));
             String attachment = request.getParameter("attachment");
             String escape_attch = attachment.replace("%20", "_");
-            String status = "inactive";
+            String status;
+            if (!session.getAttribute("role").equals("student") && !session.getAttribute("role").equals("lecturer")) {
+                status = "active";
+            } else if (session.getAttribute("role").equals("student") && edunewstypeid != 0) {
+                status = "active";
+            } else {
+                status = "inactive";
+
+            }
             String remark = request.getParameter("remark");
             int pid = Integer.parseInt(request.getParameter("priority"));
 
@@ -82,7 +90,7 @@ public class addNewsServlet extends HttpServlet {
             System.out.println(request.getRequestURL());
             if (result) {
                 if (session.getAttribute("role").equals("student")) {
-                    response.sendRedirect( "main.jsp?v=6");
+                    response.sendRedirect("main.jsp?v=6");
 
                 } else {
                     response.sendRedirect(session.getAttribute("role") + "/main.jsp?v=6");

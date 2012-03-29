@@ -144,6 +144,34 @@
         <servlet-name>updateNewsServlet</servlet-name>
         <servlet-class>com.ids.servlets.updateNewsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editUserGroupServlet</servlet-name>
+        <servlet-class>com.ids.servlets.editUserGroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageNews</servlet-name>
+        <servlet-class>com.ids.servlets.ManageNews</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditNewsTypeServlet</servlet-name>
+        <servlet-class>com.ids.servlets.EditNewsTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editNewsTypeServlet</servlet-name>
+        <servlet-class>com.ids.servlets.editNewsTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editNewsServlet</servlet-name>
+        <servlet-class>com.ids.servlets.editNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editMediaServlet</servlet-name>
+        <servlet-class>com.ids.servlets.editMediaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteNewsServlet</servlet-name>
+        <servlet-class>com.ids.servlets.deleteNewsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -283,6 +311,34 @@
     <servlet-mapping>
         <servlet-name>updateNewsServlet</servlet-name>
         <url-pattern>/updateNewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editUserGroupServlet</servlet-name>
+        <url-pattern>/editUserGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageNews</servlet-name>
+        <url-pattern>/ManageNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditNewsTypeServlet</servlet-name>
+        <url-pattern>/EditNewsTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editNewsTypeServlet</servlet-name>
+        <url-pattern>/editNewsTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editNewsServlet</servlet-name>
+        <url-pattern>/editNewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editMediaServlet</servlet-name>
+        <url-pattern>/editMediaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteNewsServlet</servlet-name>
+        <url-pattern>/deleteNewsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -62,17 +62,17 @@
 <c:choose>
     <c:when test="${param.pri != null}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid=${param.pri}  and status like 'active' order by priorityid desc;
+            SELECT * from news  where newstypeid=${param.pri}  and status like 'active'and forusergroupid = (select status from user where username = '${userid}') order by priorityid desc;
         </sql:query>
     </c:when>
     <c:when test="${param.pri == 0}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid = 5 and status like 'active'  order by priorityid desc;
+            SELECT * from news  where newstypeid = 5 and status like 'active' and forusergroupid = (select status from user where username = '${userid}')  order by priorityid desc;
         </sql:query>
     </c:when>
     <c:otherwise>
         <sql:query var="result" dataSource="db">
-            SELECT * from news where  status like 'active'  order by priorityid desc;
+            SELECT * from news where  forusergroupid = (select status from user where username = '${userid}') and status = 'active'  order by priorityid desc ,newstypeid asc;
         </sql:query>
     </c:otherwise>
 </c:choose>
@@ -109,7 +109,7 @@
 
         </c:forEach>
         <div class="newsDetail">
-            <a ><h3>Read More</h3></a>
+            <a href="main.jsp?v=rm"><h3>Read More</h3></a>
         </div>
     </ul>
 </div>

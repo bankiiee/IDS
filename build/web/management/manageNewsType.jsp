@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%String ct = this.getServletContext().getContextPath();%>
 <%-- 
     Document   : manageNewsType
     Created on : Jan 15, 2012, 11:20:26 PM
@@ -12,13 +13,13 @@
 </script>-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-        <h1>จัดการประเภทข่าวสาร กลุ่มผู้รับสาร และช่องทางการได้มาของข่าวสาร</h1>
+<h1>จัดการประเภทข่าวสาร กลุ่มผู้รับสาร และช่องทางการได้มาของข่าวสาร</h1>
 
 <div style="width: 33%; float: left;margin-right: 1px; border-right: 1px dashed black"  >
     <sql:query var="result" dataSource="db">
         SELECT newstype.id , newstype.name  from newstype;
     </sql:query>
-        
+
     NewsType
     <form action="/IDS/typeServlet" method="GET">
         <input type="txtbox" name="typeName" value="" /> <input type="submit" name="add" value="Add" /></form> <br>
@@ -42,7 +43,7 @@
                     <tr class="">
 
                         <td style="text-align: CENTER;"><c:out value="${row.id}"/></td>
-                        <td style="text-align: CENTER;"><a><c:out value="${row.name}"/></td>
+                        <td style="text-align: CENTER;"><a onClick="doeditnewstype(${row.id})"><c:out value="${row.name}"/></a></td>
                         <td style="text-align: CENTER;"><input type="checkbox" name="select" value="${row.id}"/>
                     </tr>
                 </c:forEach>
@@ -53,6 +54,27 @@
     </form>
 
 </div>
+<script type="text/javascript">
+    function doeditnewstype(id){
+       // var temp = document.getElementById(id); 
+        var name = prompt("แก้ไข");
+    
+        
+        $.ajax({
+            url: '../editNewsTypeServlet',
+            type: 'GET',
+            data: 'name='+name+'&id='+id,
+            success: function(result){
+                                                        
+                alert("Success:"+result);
+                window.location.reload();
+            }
+        });
+        
+        
+
+    }
+</script>
 
 <div style="width: 32%; float: left;margin-right: 1px; border-right: 1px dashed black"  >
     <sql:query var="result" dataSource="db">
@@ -78,7 +100,7 @@
                     <tr class="">
 
                         <td style="text-align: CENTER;"><c:out value="${row.id}"/></td>
-                        <td style="text-align: CENTER;"><a><c:out value="${row.name}"/></td>
+                        <td style="text-align: CENTER;"><a onClick="doeditusergroup(${row.id})"><c:out value="${row.name}"/></td>
                         <td style="text-align: CENTER;"><input type="checkbox" name="select" value="${row.id}"/>
 
                     </tr>
@@ -89,6 +111,28 @@
         <center><input type="submit" name="remove" value="Remove Selected" /></center>
     </form>
 </div>
+
+<script type="text/javascript">
+    function doeditusergroup(id){
+       // var temp = document.getElementById(id); 
+        var name = prompt("แก้ไข");
+    
+        
+        $.ajax({
+            url: '../editUserGroupServlet',
+            type: 'GET',
+            data: 'name='+name+'&id='+id,
+            success: function(result){
+                                                        
+                alert("Success:"+result);
+                window.location.reload();
+            }
+        });
+        
+        
+
+    }
+</script>
 
 <div style="width: 32%; float: left;"  >
     <sql:query var="result" dataSource="db">
@@ -114,7 +158,7 @@
                     <tr class="">
 
                         <td style="text-align: CENTER;"><c:out value="${row.id}"/></td>
-                        <td style="text-align: CENTER;"><a><c:out value="${row.name}"/></td>
+                        <td style="text-align: CENTER;"><a onClick="doeditmedia(${row.id})"><c:out value="${row.name}"/></td>
                         <td style="text-align: CENTER;"><input type="checkbox" name="select" value="${row.id}"/>
 
                     </tr>
@@ -127,3 +171,26 @@
         <center><input type="submit" name="remove" value="Remove Selected" /></center>
     </form>
 </div>
+
+<script type="text/javascript">
+    function doeditmedia(id){
+       // var temp = document.getElementById(id); 
+        var name = prompt("แก้ไข");
+    
+        
+        $.ajax({
+            url: '../editMediaServlet',
+            type: 'GET',
+            data: 'name='+name+'&id='+id,
+            success: function(result){
+                                                        
+                alert("Success:"+result);
+                window.location.reload();
+            }
+        });
+        
+        
+
+    }
+</script>
+

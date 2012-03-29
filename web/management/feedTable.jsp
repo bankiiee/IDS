@@ -115,7 +115,7 @@
 
         </c:forEach>
         <div class="newsDetail">
-            <a ><h3>Read More</h3></a>
+            <a href="main.jsp?v=rm"><h3>Read More</h3></a>
         </div>
     </ul>
 </div>
@@ -125,4 +125,4 @@
 
 
 
-         <a href="http://twitter.com/home?status=Custom%20status%20here" target="_blank">Post to Twitter!</a>
+<!--         <a href="http://twitter.com/home?status=Custom%20status%20here" target="_blank">Post to Twitter!</a>-->
