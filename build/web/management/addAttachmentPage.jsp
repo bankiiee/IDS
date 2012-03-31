@@ -31,8 +31,8 @@
                     debug: true,
                     onComplete: function(file, response) {
                         document.getElementById("filename").value = 'attachments/'+response;
-                       var path = escape(response);
-                        window.returnValue ='attachments/'+path;
+                    //   var path = escape(response);
+                    window.returnValue ='attachments/'+response;
                         window.close();
                     }
                 });       

@@ -6,4 +6,12 @@
             <line>28</line>
         </file>
     </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/Users/bankiiee/GithubSources/IDS/web/management/feedTable.jsp</file>
+        <file>file:/Users/bankiiee/GithubSources/IDS/src/java/com/ids/servlets/addNewsServlet.java</file>
+        <file>file:/Users/bankiiee/GithubSources/IDS/web/management/manageFeed.jsp</file>
+        <file>file:/Users/bankiiee/GithubSources/IDS/src/java/com/ids/model/News.java</file>
+        <file>file:/Users/bankiiee/GithubSources/IDS/src/java/com/ids/servlets/GenXMLServlet.java</file>
+        <file>file:/Users/bankiiee/GithubSources/IDS/web/sendNews.jsp</file>
+    </open-files>
 </project-private>

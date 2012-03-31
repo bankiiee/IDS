@@ -153,9 +153,9 @@
         </fieldset>
     </form>
 </div>
-<script src="scripts/fileuploadChecker.js" type="text/javascript"></script>
+<script src="<%=ct%>/scripts/fileuploadChecker.js" type="text/javascript"></script>
 
-<script src="scripts/fileuploader.js" type="text/javascript"></script>
+<script src="<%=ct%>/scripts/fileuploader.js" type="text/javascript"></script>
 <script>
     
     function createUploader(){            
@@ -178,9 +178,9 @@
     }
     
     function openChild(){
-         var retval=window.showModalDialog("addAttachmentPage.jsp");
-//document.getElementById('filename').value;
-    window.returnValue = retval;
-document.getElementById("attachment").value= window.returnValue;
+        var retval=window.showModalDialog("addAttachmentPage.jsp");
+        //document.getElementById('filename').value;
+        window.returnValue = retval;
+        document.getElementById("attachment").value= window.returnValue;
     }
 </script>  
