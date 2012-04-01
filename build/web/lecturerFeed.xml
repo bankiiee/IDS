@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>IDS Communication Feed Channel</title>
+        <description>IDS System</description>
+        <link/>
+        <lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>
+        <pubDate>Mon, 06 Sep 2010 00:01:00 +0000 </pubDate>
+        <item>
+            <name>Panwit Tuwanut</name>
+            <room>525</room>
+            <status>Out-Of-Office</status>
+            <id>3</id>
+        </item>
+    </channel>
+</rss>

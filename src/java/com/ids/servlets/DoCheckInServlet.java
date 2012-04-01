@@ -56,7 +56,10 @@ public class DoCheckInServlet extends HttpServlet {
                this.getServletContext().setAttribute("checkins", "In-Office");
 //               RequestDispatcher rd = request.getRequestDispatcher("lecturer/main.jsp?checkin=yes");
 //               rd.forward(request, response);
-               response.sendRedirect("lecturer/main.jsp?checkin=yes");
+               RequestDispatcher rd = request.getRequestDispatcher("GenXMLServlet");
+               rd.forward(request, response);
+               
+             //  response.sendRedirect("lecturer/main.jsp?checkin=yes");
            }else{
                System.out.println("ERROR");
            }

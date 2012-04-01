@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +54,9 @@ public class DoCheckOutServlet extends HttpServlet {
                this.getServletContext().setAttribute("checkins", "Out-Of-Office");
 //               RequestDispatcher rd = request.getRequestDispatcher("lecturer/main.jsp?checkin=yes");
 //               rd.forward(request, response);
-               response.sendRedirect("lecturer/main.jsp?checkout=yes");
+                  RequestDispatcher rd = request.getRequestDispatcher("GenXMLServlet");
+               rd.forward(request, response);
+              // response.sendRedirect("lecturer/main.jsp?checkout=yes");
            }else{
                out.println("ERROR");
            }

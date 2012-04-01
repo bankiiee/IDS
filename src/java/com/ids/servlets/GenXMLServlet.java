@@ -4,8 +4,10 @@
  */
 package com.ids.servlets;
 
+import com.ids.model.Lecturer;
 import com.ids.model.News;
 import com.ids.util.XMLCreator;
+import com.ids.util.XMLCreatorLecturer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -44,7 +46,7 @@ public class GenXMLServlet extends HttpServlet {
         response.setContentType("text/html;charset=TIS-620");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-       
+
         try {
             /*
              * TODO output your page here. You may use following sample code.
@@ -52,14 +54,14 @@ public class GenXMLServlet extends HttpServlet {
             System.out.println("From GenXMLServlet Says HELLO");
             String page = request.getParameter("page");
             String view = request.getParameter("v");
-            System.out.println("Page to go is "+page+"  "+view);
+            System.out.println("Page to go is " + page + "  " + view);
             System.out.println();
             Connection conn = (Connection) this.getServletContext().getAttribute("conn");
             String sql = "Select * from News where status = 'active' order by id desc";
             Statement stmt = conn.createStatement();
-            ResultSet rs  = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             List list = new ArrayList();
-            while(rs.next()){
+            while (rs.next()) {
                 News n = new News();
                 n.setNewsid(rs.getInt(1));
                 n.setPublisher(rs.getString(2));
@@ -77,30 +79,46 @@ public class GenXMLServlet extends HttpServlet {
                 list.add(n);
                 out.println(list.size());
                 out.println("Headline     " + rs.getString("topic"));
-                
+
             }
-             XMLCreator xce = new XMLCreator(list);
-             xce.setSavedLocation(this.getServletContext().getRealPath(""));
-             xce.runExample();
-            
-            
-            
-            
-            
-            
-            
+            XMLCreator xce = new XMLCreator(list);
+            xce.setSavedLocation(this.getServletContext().getRealPath(""));
+            xce.runExample();
+
+            String sql2 = "select * from lecturer";
+            ResultSet rs2 = stmt.executeQuery(sql2);
+            List list2 = new ArrayList();
+            while (rs2.next()) {
+                Lecturer l = new Lecturer();
+                l.setId(rs2.getInt(1));
+                l.setUsername(rs2.getString(2));
+                l.setFname(rs2.getString(3));
+                l.setLname(rs2.getString(4));
+                l.setRoom(rs2.getString(5));
+                l.setStatus(rs2.getString(6));
+                list2.add(l);
+            }
+            XMLCreatorLecturer xcel = new XMLCreatorLecturer(list2);
+            xcel.setSavedLocation(this.getServletContext().getRealPath(""));
+            xcel.runExample();
+
+
+
+
 //            RequestDispatcher rd = request.getRequestDispatcher(page+"?v="+view+"&refresh=true");
 //            rd.forward(request, response);
-             if(session.getAttribute("role").equals("student")){
-                             response.sendRedirect(""+page+"?v="+view+"&refresh=true");
+            if (session.getAttribute("role").equals("student")) {
+                response.sendRedirect("" + page + "?v=" + view + "&refresh=true");
 
-             }else{
-                             response.sendRedirect(session.getAttribute("role")+"/"+page+"?v="+view+"&refresh=true");
-                           //  request.getRequestDispatcher(session.getAttribute("role")+"/"+page+"?v="+view+"&refresh=true").forward(request, response);
-             }
+            } else if (session.getAttribute("role").equals("lecturer")) {
+                response.sendRedirect("lecturer/main.jsp?gen=yes");
+            } else {
+                response.sendRedirect(session.getAttribute("role") + "/" + page + "?v=" + view + "&refresh=true");
+                //  request.getRequestDispatcher(session.getAttribute("role")+"/"+page+"?v="+view+"&refresh=true").forward(request, response);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GenXMLServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {            
+        } finally {
             out.close();
         }
     }
