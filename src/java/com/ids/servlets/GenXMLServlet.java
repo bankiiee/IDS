@@ -55,7 +55,7 @@ public class GenXMLServlet extends HttpServlet {
             System.out.println("Page to go is "+page+"  "+view);
             System.out.println();
             Connection conn = (Connection) this.getServletContext().getAttribute("conn");
-            String sql = "Select * from News where status = 'active'";
+            String sql = "Select * from News where status = 'active' order by id desc";
             Statement stmt = conn.createStatement();
             ResultSet rs  = stmt.executeQuery(sql);
             List list = new ArrayList();

@@ -30,19 +30,17 @@
         | <input type="button" name="inactall" value="Inactive All" onClick="setAllSelectedInActive();"/>
         <thead>
             <tr style="font-size: 14px">
-                <th style='width: 40px;'>Publisher</th>
-                <th>Headline</th>
+                <th style='width: 100px;'>Publisher</th>
+                <th style="width: 250px">Headline</th>
                 <!--                <th>Story</th>-->
-                <th>Post Date</th>
-                <th>Publish Until</th>
+                <th>Send Date</th>
                 <th>User Group ID</th>
                 <th>News Type ID</th>
                 <th>Media ID</th>
-                <th>Attachment</th>
-                <th style="width: 20%">News Status<br>
+                <th  style="width: 100px">Attachment</th>
+                <th style="width: 200px">News Status<br>
                 </th>
                 <th>Priority</th>
-                <th>Remark</th>
             </tr>
             </thread>
             <!-- column data -->
@@ -53,7 +51,6 @@
                     <td style="text-align: CENTER;"><a onClick="doedit(${row.id})"><c:out value="${row.topic}"/></a></td>
                                                        <!--                    <td style="text-align: CENTER;"><c:out value="${row.story}"/></td>-->
                     <td style="text-align: CENTER; width: 75px;"><c:out value="${row.fromdate}"/></td>
-                    <td style="text-align: CENTER;width: 75px;"><c:out value="${row.todate}"/></td>
 
                     <td style="text-align: CENTER;">
                         <sql:query var="item2" dataSource="db">
@@ -86,7 +83,7 @@
                             <img src="<%=ct%>/${row.attchpath}" style="width: 48px;height: 48px;"/>
                         </a>
                     </td>
-                    <td style="text-align: LEFT;width: 50px;">Status :<b>${row.status}</b><br>
+                    <td style="text-align: LEFT;width: 50px;">Status :<b>${row.status}</b>
                         <input type="radio" name="status" value="active" onclick="setSelectedActive(${row.id})"/>active
                         <input type="radio" name="status" value="inactive" onclick="setSelectedInActive(${row.id})"/>inactive
                     </td>
@@ -99,7 +96,6 @@
                         </c:forEach>
 
                     </td>
-                    <td style="text-align: LEFT;"><c:out value="${row.remark}"/></td>
 
                 </tr>
             </c:forEach>

@@ -31,7 +31,6 @@ public class XMLCreator {
     private List myData;
     private Document dom;
     private String SavedLocation;
-
     public XMLCreator(List data) {
         //create a list to hold the data
         myData = new ArrayList();
@@ -155,14 +154,15 @@ public class XMLCreator {
         //create author element and author text node and attach it to bookElement
         
        Element desc = getDom().createElement("description");
-       desc.setTextContent(""+n.getStory()+"\n <a style='color:red;' href='javascript:showNewsDialog("+n.getNewsid()+");'>Read more</a>");
+       desc.setTextContent(""+n.getStory()+"");
         itemEle.appendChild(desc);
         
-        Element linkEle = getDom().createElement("link");
-        //linkEle.setTextContent("");
+        Element linkEle = getDom().createElement("attachment");
+        linkEle.setTextContent(""+n.getAttchpath());
+        System.out.println();
         itemEle.appendChild(linkEle);
-        Element guidEle = getDom().createElement("guid");
-        guidEle.setTextContent("Read This");
+        Element guidEle = getDom().createElement("newsid");
+        guidEle.setTextContent(""+n.getNewsid());
         itemEle.appendChild(guidEle);
         Element pubEle = getDom().createElement("pubDate");
         pubEle.setTextContent(n.getFromdate());
