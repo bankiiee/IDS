@@ -64,7 +64,7 @@ public class addNewsServlet extends HttpServlet {
             String status;
             if (!session.getAttribute("role").equals("student") && !session.getAttribute("role").equals("lecturer")) {
                 status = "active";
-            } else if (session.getAttribute("role").equals("lecturer") && edunewstypeid != 0) {
+            } else if (session.getAttribute("role").equals("student") && edunewstypeid != 0) {
                 status = "active";
             } else {
                 status = "inactive";
