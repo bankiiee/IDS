@@ -62,7 +62,7 @@
 <c:choose>
     <c:when test="${param.pri != null}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid=${param.pri}  and status like 'active'and forusergroupid = (select status from user where username = '${userid}') order by priorityid desc;
+            SELECT * from news n, news_has_usergroup g, usergroup u  where n.newstypeid=${param.pri}  and status like 'active' and n.id = g.newsid and g.usergroupid = 4 order by priorityid desc;
         </sql:query>
     </c:when>
     <c:when test="${param.pri == 0}">

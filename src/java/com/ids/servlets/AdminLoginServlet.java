@@ -50,32 +50,31 @@ public class AdminLoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String role = "management";
-            if (role.contains(role) && username.equals("admin") && password.equals("adminadmin")) {
-                try {
-              //       conn = (Connection) this.getServletContext().getAttribute("conn");
-//                    String sql = "select * from admin where username = '" + username + "'";
-//                    Statement stmt = conn.createStatement();
-//                    ResultSet rs = stmt.executeQuery(sql);
+//            if (role.contains(role) && username.equals("admin") && password.equals("adminadmin")) {
+            try {
+                conn = (Connection) this.getServletContext().getAttribute("conn");
+                String sql = "select * from admin where username = '" + username + "' and password = '"+password+"'";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                if (rs.next()) {
                     session.setAttribute("username", username);
-                    session.setAttribute("userid", username);
-                    session.setAttribute("firstname", username);
-                    session.setAttribute("lastname", username);
+                    session.setAttribute("userid", rs.getInt("id"));
+                    session.setAttribute("firstname", rs.getString("fname"));
+                    session.setAttribute("lastname", rs.getString("lname"));
                     session.setAttribute("isAdmin", true);
                     session.setAttribute("role", role);
-                    session.setAttribute("id","9999");
+                    session.setAttribute("id", rs.getInt("id"));
                     response.sendRedirect("management/main.jsp?refresh=1");
-//                    if (rs.next()) {
-//                        response.sendRedirect("management/main.jsp");
-//                    } else {
-//                        response.sendRedirect("management/main.jsp?v=999");
-//                    }
-
-                } catch (Exception ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    response.sendRedirect("adminLogin.jsp?error=1");
                 }
-            } else {
-                response.sendRedirect("adminLogin.jsp?error=2");
+
+            } catch (Exception ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            } else {
+//                response.sendRedirect("adminLogin.jsp?error=2");
+//            }
             out.println("</body>");
             out.println("</html>");
 

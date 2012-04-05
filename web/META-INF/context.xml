@@ -3,4 +3,6 @@
   <!--  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="db" password="root" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ids" username="root"/>-->
   <!--  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="db" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ids?characterEncoding=UTF-8" username="root"/>-->
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="db" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ids?characterEncoding=UTF-8" username="root"/>
+<!--  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="db" password="lF,wvmusd" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ids?characterEncoding=UTF-8" username="smo"/>-->
+
 </Context>

@@ -41,7 +41,7 @@
     function eduSubTypeSelect(){
         var edutype = document.getElementById("edu").value;
         //        var edusubtype = document.getElementById("edusubtype");
-        alert(edutype);
+       console.log(edutype);
         if(edutype == 1){
             edu2.style.visibility = 'visible';
         }
@@ -75,18 +75,20 @@
                 </tr>
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
-                    <td><select name="forusergroupid">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                        <select name="forusergroupid">-->
                             <c:forEach var="item" items="${row.rows}">
-                                <option value="${item.id}">${item.name}</option>
+<!--                                <option value="${item.id}">${item.name}</option>-->
+                                <input type="checkbox" name="forusergroupid" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
                             </c:forEach>
-                        </select>
+<!--                        </select>-->
                     </td>
 
                 </tr>
                 <tr>
                     <td style="width:40%;">ประเภทของข่าว</td>
                     <td><select name="newstypeid" onchange="eduSubTypeSelect()" id="edu">
-                            <option >----โปรดระบุ----</option>
+<!--                            <option >----โปรดระบุ----</option>-->
                             <c:forEach var="item" items="${row2.rows}">
                                 <option value="${item.id}">${item.name}</option>
                             </c:forEach>

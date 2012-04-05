@@ -34,13 +34,13 @@
             <c:when test="${param.error == 1}">
                 <script type="text/javascript">
                     alert("Invalid Username and Password");
-                    window.location="login.jsp";
+                    window.location="adminLogin.jsp";
                 </script>
             </c:when>
             <c:when test="${param.error == 2}">
                 <script type="text/javascript">
                     alert("กรุณาตรวจสอบข้อมูลใหม่อีกครั้ง");
-                    window.location="login.jsp";
+                    window.location="adminLogin.jsp";
                 </script>
             </c:when>
             <c:otherwise>
