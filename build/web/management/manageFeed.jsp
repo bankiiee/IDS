@@ -17,7 +17,7 @@
     SELECT * FROM newstype;
 </sql:query>
 <sql:query var="row3" dataSource="db">
-    SELECT * FROM media;
+    SELECT * FROM inputmedia;
 </sql:query>
 <sql:query var="row4" dataSource="db">
     SELECT * FROM edunews;
@@ -29,12 +29,20 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <script type="text/javascript">
+    
     $(function() {
+        //alert(2);
         $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
         $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
         edu2 =  document.getElementById("edu2");
-
+        
         edu2.style.visibility = 'hidden';
+        
+        var time = new Date();
+        var timestr = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
+        console.log(timestr);
+        document.getElementById("datepicker").value = timestr;
+        
     });
    
     
@@ -55,7 +63,7 @@
             <table>
                 <tr>
                     <td style="width:40%;">หัวข้อข่าว</td>
-                    <td><input type="text" name="headline" value="" size="50%" placeholder="หัวข้อข่าวที่ต้องการประกาศ" autofocus="autofocus" /></td>
+                    <td><input type="text" name="topic" value="" size="50%" placeholder="หัวข้อข่าวที่ต้องการประกาศ" autofocus="autofocus" /></td>
 
                 </tr>
                 <tr>
@@ -64,18 +72,18 @@
 
                 </tr>
                 <tr>
-                    <td style="width:40%;">วันที่เริ่มประกาศ</td>
-                    <td><input type="text" name="fromdate" value="2012-01-17" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
+                    <td style="width:40%;">วันที่ส่งประกาศ</td>
+                    <td><input type="text" name="senddate" value="" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
 
                 </tr>
-                <tr>
+<!--                <tr>
                     <td style="width:40%;">วันที่สิ้นสุดการประกาศ</td>
                     <td><input type="text" name="todate" value="2012-01-20" size="50%" placeholder="yyyy-mm-dd"  id="datepicker2"/></td>
 
-                </tr>
+                </tr>-->
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <td>&nbsp;&nbsp;
 <!--                        <select name="forusergroupid">-->
                             <c:forEach var="item" items="${row.rows}">
 <!--                                <option value="${item.id}">${item.name}</option>-->
@@ -88,7 +96,7 @@
                 <tr>
                     <td style="width:40%;">ประเภทของข่าว</td>
                     <td><select name="newstypeid" onchange="eduSubTypeSelect()" id="edu">
-<!--                            <option >----โปรดระบุ----</option>-->
+                            <option  value="0">----โปรดระบุ----</option>
                             <c:forEach var="item" items="${row2.rows}">
                                 <option value="${item.id}">${item.name}</option>
                             </c:forEach>
@@ -109,7 +117,7 @@
                 <tr >
                 <tr>
                     <td style="width:40%;">รับข่าวสารมาจากสื่อใด</td>
-                    <td><select name="mediaid">
+                    <td><select name="inputmediaid">
                             <c:forEach var="item" items="${row3.rows}">
                                 <option value="${item.id}">${item.name}</option>
                             </c:forEach>

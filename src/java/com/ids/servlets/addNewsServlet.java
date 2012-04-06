@@ -5,15 +5,15 @@
 package com.ids.servlets;
 
 import com.ids.model.News;
-import com.ids.util.XMLCreator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,24 +47,23 @@ public class addNewsServlet extends HttpServlet {
 
         try {
             News news = new News();
-            int id = Integer.parseInt((String) session.getAttribute("id")); // userid for ids db only
-            System.out.println("USERID:" + id);
-            String headline = request.getParameter("headline").trim();
-            String story = request.getParameter("story");
-            String fromdate = request.getParameter("fromdate");
-            String todate = request.getParameter("todate");
+
+            String headline = request.getParameter("topic").trim();
+            String story = request.getParameter("story").trim();
+            String senddate = request.getParameter("senddate");
+            // String todate = request.getParameter("todate");
             System.out.println((String) request.getParameter("forusergroupid"));
-            int forusergroupid = Integer.parseInt((String) request.getParameter("forusergroupid"));
+            String[] forusergroupid = request.getParameterValues("forusergroupid");;
             int newstypeid = Integer.parseInt((String) request.getParameter("newstypeid"));
             int edunewstypeid = Integer.parseInt(request.getParameter("edunewstypeid"));
 
-            int mediaid = Integer.parseInt((String) request.getParameter("mediaid"));
+            int inputmediaid = Integer.parseInt((String) request.getParameter("inputmediaid"));
             String attachment = request.getParameter("attachment");
             String escape_attch = attachment.replace("%20", "_");
             String status;
             if (!session.getAttribute("role").equals("student") && !session.getAttribute("role").equals("lecturer")) {
                 status = "active";
-            } else if (session.getAttribute("role").equals("student") && edunewstypeid != 0) {
+            } else if (session.getAttribute("role").equals("lecturer") && edunewstypeid != 0) {
                 status = "active";
             } else {
                 status = "inactive";
@@ -72,29 +71,43 @@ public class addNewsServlet extends HttpServlet {
             }
             String remark = request.getParameter("remark");
             int pid = Integer.parseInt(request.getParameter("priority"));
-
-            news.setPublisher(session.getAttribute("username").toString());
-            news.setHeadline(headline);
+            System.out.println("" + session.getAttribute("userid"));
+            news.setUserid(Integer.parseInt(session.getAttribute("id").toString()));
+            news.setTopic(headline);
             news.setStory(story);
-            news.setFromdate(fromdate);
-            news.setTodate(todate);
-            news.setForusergroupid(forusergroupid);
+            news.setSenddate(senddate);
+            // news.setTodate(todate);
+            // news.setForusergroupid(forusergroupid);
             news.setNewstypeid(newstypeid);
-            news.setMediaid(mediaid);
-            news.setAttchpath(escape_attch);
+            news.setInputmediaid(inputmediaid);
+            // news.setAttchpath(escape_attch);
             news.setStatus(status);
             news.setRemark(remark + edunewstypeid);
             news.setPriorityid(pid);
 
             boolean result = this.addNews(news);
             System.out.println(request.getRequestURL());
+            System.out.println("Insert row: " + result);
             if (result) {
                 if (session.getAttribute("role").equals("student")) {
-                    response.sendRedirect("main.jsp?v=6");
+                    String sql = "select * from news order by id desc limit 1";
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql);
+                    rs.next();
+                    int newsid = rs.getInt("id");
+                    int aff = 0;
+                    for (int i = 0; i < forusergroupid.length; i++) {
+                        String sql2 = "insert into news_has_usergroup values (" + newsid + "," + Integer.parseInt(forusergroupid[i]) + ")";
+                        aff += stmt.executeUpdate(sql2);
+                        System.out.println("Row Affected " + aff);
+                    }
+                    if (aff == forusergroupid.length) {
+                        System.out.println("Complete!");
+                        response.sendRedirect("main.jsp?v=6");
+                    } else {
+                        response.sendRedirect(session.getAttribute("role") + "/main.jsp?v=6");
 
-                } else {
-                    response.sendRedirect(session.getAttribute("role") + "/main.jsp?v=6");
-
+                    }
                 }
                 //RequestDispatcher rd = request.getRequestDispatcher("GenXMLServlet?page=main.jsp&v=6");
                 //rd.forward(request, response);
@@ -103,6 +116,8 @@ public class addNewsServlet extends HttpServlet {
                 //  response.sendRedirect(session.getAttribute("role")+"main.jsp?v=5&status=error");
             }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(addNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             out.close();
         }
@@ -111,24 +126,24 @@ public class addNewsServlet extends HttpServlet {
     public boolean addNews(News n) {
         boolean result = false;
         try {
-            String sql = "insert into news(publisher, topic, story, fromdate, todate, forusergroupid,newstypeid,mediaid,attchpath,status,remark,priorityid) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into news(userid, topic, story, senddate,newstypeid,inputmediaid,status,remark,priorityid) values(?,?,?,?,?,?,?,?,?)";
             System.out.println("Connection is null ?" + this.conn);
             PreparedStatement pstmt = this.conn.prepareStatement(sql);
 
-            pstmt.setString(1, n.getPublisher());
-            pstmt.setString(2, n.getHeadline());
+            pstmt.setInt(1, n.getUserid());
+            pstmt.setString(2, n.getTopic());
             pstmt.setString(3, n.getStory());
-            pstmt.setString(4, n.getFromdate());
-            pstmt.setString(5, n.getTodate());
-            pstmt.setInt(6, n.getForusergroupid());
-            pstmt.setInt(7, n.getNewstypeid());
-            pstmt.setInt(8, n.getMediaid());
-            pstmt.setString(9, n.getAttchpath());
-            pstmt.setString(10, n.getStatus());
-            pstmt.setString(11, n.getRemark());
-            pstmt.setInt(12, n.getPriorityid());
+            pstmt.setString(4, n.getSenddate());
+//            pstmt.setString(5, n.getTodate());
+//            pstmt.setInt(4, n.getForusergroupid());
+            pstmt.setInt(5, n.getNewstypeid());
+            pstmt.setInt(6, n.getInputmediaid());
+//            pstmt.setString(9, n.getAttchpath());
+            pstmt.setString(7, n.getStatus());
+            pstmt.setString(8, n.getRemark());
+            pstmt.setInt(9, n.getPriorityid());
 
-            System.out.println("Insert String:" + n.getHeadline());
+            System.out.println("Insert String:" + n.getTopic());
             int s = pstmt.executeUpdate();
             if (s != 0) {
                 System.out.println("Add News to DB Success!");

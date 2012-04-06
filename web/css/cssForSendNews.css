@@ -56,7 +56,7 @@ a.back{
     /*                      padding: 0px 0 0 20px;            */
 }
 .form_wrapper .column{
-    width:50%;
+    width:20%;
     float:left;
 }
 form.active{
@@ -193,7 +193,7 @@ form.forgot_password{
 }
 .form_wrapper table{
     border-style: none;
-    width: 590px;
+    width: 650px;
 /*    margin-left: -10px;*/
 
 }

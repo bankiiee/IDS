@@ -57,7 +57,7 @@ public class updateStudentProfileServlet extends HttpServlet {
             String twitter = request.getParameter("twitter");
             
            Connection conn = (Connection) this.getServletContext().getAttribute("conn");
-           String sql = "insert into user(username,fname,lname,telno,fbacc,twitacc,email,status,usergroupid,remark) values (?,?,?,?,?,?,?,?,?,?)";
+           String sql = "insert into user(username,fname,lname,telno,fbacc,twitacc,email,usergroupid,remark) values (?,?,?,?,?,?,?,?,?)";
            PreparedStatement pstmt = conn.prepareStatement(sql);
            pstmt.setString(1, session.getAttribute("userid")+"");
            pstmt.setString(2, fname);
@@ -67,8 +67,7 @@ public class updateStudentProfileServlet extends HttpServlet {
            pstmt.setString(6, twitter);
            pstmt.setString(7, email);
            pstmt.setInt(8, Integer.parseInt(currentyear));
-           pstmt.setString(9, "1");
-           pstmt.setString(10,"Test User");
+           pstmt.setString(9,"Updated!");
           
            int success = pstmt.executeUpdate();
            if(success == 1){

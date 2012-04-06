@@ -53,7 +53,7 @@ public class AdminLoginServlet extends HttpServlet {
 //            if (role.contains(role) && username.equals("admin") && password.equals("adminadmin")) {
             try {
                 conn = (Connection) this.getServletContext().getAttribute("conn");
-                String sql = "select * from admin where username = '" + username + "' and password = '"+password+"'";
+                String sql = "select * from user u, admin a where u.username = '" + username + "' and a.password = '"+password+"'";
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 if (rs.next()) {

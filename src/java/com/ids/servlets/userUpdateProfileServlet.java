@@ -55,7 +55,7 @@ public class userUpdateProfileServlet extends HttpServlet {
             String twitter = request.getParameter("twitter");
             
            Connection conn = (Connection) this.getServletContext().getAttribute("conn");
-           String sql = "update user set fname = ?, lname = ?, telno = ?, fbacc = ?, twitacc = ?, email = ?, status = ? where username = ?";
+           String sql = "update user set fname = ?, lname = ?, telno = ?, fbacc = ?, twitacc = ?, email = ?, usergroupid = ? where username = ?";
            PreparedStatement pstmt = conn.prepareStatement(sql);
            pstmt.setString(1, fname);
            pstmt.setString(2, lname);

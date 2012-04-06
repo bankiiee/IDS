@@ -33,7 +33,7 @@
     <h1>Read More News</h1>
 
     <sql:query var="result" dataSource="db">
-        SELECT id,publisher,topic,story,fromdate,attchpath from news order by id desc;
+        SELECT id,userid,topic,story,senddate  from news  where status like 'active' order by id desc;
     </sql:query>
 
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
@@ -44,7 +44,7 @@
                 <th style='width: 40px;'>Publisher</th>
                 <th style='width: auto;'>Headline</th>
                 <!--                <th>Story</th>-->
-                <th>Post Date</th>
+                <th style="width:15%;">Post Date</th>
 
                 <th>Attachment</th>
 
@@ -54,15 +54,31 @@
         <tbody>
             <c:forEach var="row" items="${result.rows}">
                 <tr class="">
-                    <td style="text-align: CENTER;"><c:out value="${row.publisher}"/></td>
+                    <td style="text-align: CENTER;">
+                        <sql:query var="item3" dataSource="db">
+                            SELECT *  FROM user where id = ${row.userid}
+                        </sql:query>
+                        <c:forEach var="row3" items="${item3.rows}">
+                                 ${row3.fname} ${row3.lname}
+
+                        </c:forEach>
+                    
+                    </td>
                     <td style="text-align: CENTER;"><a onClick="showMore(${row.id})"><c:out value="${row.topic}"/></a></td>
                                                        <!--                    <td style="text-align: CENTER;"><c:out value="${row.story}"/></td>-->
-                    <td style="text-align: CENTER;"><c:out value="${row.fromdate}"/></td>
+                    <td style="text-align: CENTER;"><c:out value="${row.senddate}"/></td>
 
                     <td style="text-align: CENTER;">
-                        <a onClick="showPic('<%=ct%>/${row.attchpath}')">
-                            <img src="<%=ct%>/${row.attchpath}" style="width: 48px;height: 48px;"/>
+                        <sql:query var="item2" dataSource="db">
+                            SELECT * FROM picture where newsid = ${row.id}
+                        </sql:query>
+
+                            <c:forEach var="row2" items="${item2.rows}">
+                                 <a onClick="showPic('<%=ct%>/${row2.path}')">
+                            <img src="<%=ct%>/${row2.path}" style="width: 48px;height: 48px;"/>
                         </a>
+                            </c:forEach>
+                       
                     </td>
 
                 </tr>

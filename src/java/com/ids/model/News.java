@@ -9,63 +9,71 @@ package com.ids.model;
  * @author Servlets
  */
 public class News {
-    private String publisher;
-    private int newsid;
-    private String headline;
+    private Integer id;
+    private Integer userid;
+    private String topic;
     private String story;
-    private String fromdate;
-    private String todate;
-    private String remark;
-    private int forusergroupid;
-    private int newstypeid;
-    private int mediaid;
-    private String attchpath;
+    private String senddate;
+    private String postdate;
+    private Integer newstypeid;
+    private Integer edunewsid;
+    private Integer inputmediaid;
     private String status;
-    private int priorityid;
+    private Integer priorityid;
+    private String remark;
 
     /**
      * @return the userid
      */
     public News(News n){
-        this.publisher = n.getPublisher();
-        this.headline = n.getHeadline();
-     
-        this.story = n.getStory();
-        this.fromdate = n.getFromdate();
-        this.todate = n.getTodate();
-        this.remark = n.getRemark();
-        this.forusergroupid = n.getForusergroupid();
-        this.newstypeid = n.getNewstypeid();
-        this.mediaid = n.getMediaid();
-        this.status = n.getStatus();
-        this.attchpath = n.getAttchpath();
-        this.priorityid = n.getPriorityid();
+       
                 
     }
 
     public News() {
        
     }
-    
-  
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the userid
+     */
+    public Integer getUserid() {
+        return userid;
+    }
 
     /**
      * @param userid the userid to set
      */
-   
-
-    /**
-     * @return the headline
-     */
-    public String getHeadline() {
-        return headline;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     /**
-     * @param headline the headline to set
+     * @return the topic
      */
-    public void setHeadline(String headline) {
-        this.headline = headline;
+    public String getTopic() {
+        return topic;
+    }
+
+    /**
+     * @param topic the topic to set
+     */
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     /**
@@ -83,31 +91,101 @@ public class News {
     }
 
     /**
-     * @return the fromdate
+     * @return the senddate
      */
-    public String getFromdate() {
-        return fromdate;
+    public String getSenddate() {
+        return senddate;
     }
 
     /**
-     * @param fromdate the fromdate to set
+     * @param senddate the senddate to set
      */
-    public void setFromdate(String fromdate) {
-        this.fromdate = fromdate;
+    public void setSenddate(String senddate) {
+        this.senddate = senddate;
     }
 
     /**
-     * @return the todate
+     * @return the postdate
      */
-    public String getTodate() {
-        return todate;
+    public String getPostdate() {
+        return postdate;
     }
 
     /**
-     * @param todate the todate to set
+     * @param postdate the postdate to set
      */
-    public void setTodate(String todate) {
-        this.todate = todate;
+    public void setPostdate(String postdate) {
+        this.postdate = postdate;
+    }
+
+    /**
+     * @return the newstypeid
+     */
+    public Integer getNewstypeid() {
+        return newstypeid;
+    }
+
+    /**
+     * @param newstypeid the newstypeid to set
+     */
+    public void setNewstypeid(Integer newstypeid) {
+        this.newstypeid = newstypeid;
+    }
+
+    /**
+     * @return the edunewsid
+     */
+    public Integer getEdunewsid() {
+        return edunewsid;
+    }
+
+    /**
+     * @param edunewsid the edunewsid to set
+     */
+    public void setEdunewsid(Integer edunewsid) {
+        this.edunewsid = edunewsid;
+    }
+
+    /**
+     * @return the inputmediaid
+     */
+    public Integer getInputmediaid() {
+        return inputmediaid;
+    }
+
+    /**
+     * @param inputmediaid the inputmediaid to set
+     */
+    public void setInputmediaid(Integer inputmediaid) {
+        this.inputmediaid = inputmediaid;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the priorityid
+     */
+    public Integer getPriorityid() {
+        return priorityid;
+    }
+
+    /**
+     * @param priorityid the priorityid to set
+     */
+    public void setPriorityid(Integer priorityid) {
+        this.priorityid = priorityid;
     }
 
     /**
@@ -125,126 +203,7 @@ public class News {
     }
 
     /**
-     * @return the forusergroupid
+     * @return the id
      */
-    public int getForusergroupid() {
-        return forusergroupid;
-    }
-
-    /**
-     * @param forusergroupid the forusergroupid to set
-     */
-    public void setForusergroupid(int forusergroupid) {
-        this.forusergroupid = forusergroupid;
-    }
-
-    /**
-     * @return the newstypeid
-     */
-    public int getNewstypeid() {
-        return newstypeid;
-    }
-
-    /**
-     * @param newstypeid the newstypeid to set
-     */
-    public void setNewstypeid(int newstypeid) {
-        this.newstypeid = newstypeid;
-    }
-
-    /**
-     * @return the newsinputid
-     */
-    public int getMediaid() {
-        return mediaid;
-    }
-
-    /**
-     * @param newsinputid the newsinputid to set
-     */
-    public void setMediaid(int mediaid) {
-        this.mediaid = mediaid;
-    }
-
-    /**
-     * @return the attatchment
-     */
-  
-
-    /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * @return the newsid
-     */
-    public int getNewsid() {
-        return newsid;
-    }
-
-    /**
-     * @param newsid the newsid to set
-     */
-    public void setNewsid(int newsid) {
-        this.newsid = newsid;
-    }
-
-    /**
-     * @return the attatchmentid
-     */
-   
-
-    /**
-     * @return the priorityid
-     */
-    public int getPriorityid() {
-        return priorityid;
-    }
-
-    /**
-     * @param priorityid the priorityid to set
-     */
-    public void setPriorityid(int priorityid) {
-        this.priorityid = priorityid;
-    }
-
-    /**
-     * @return the publisher
-     */
-    public String getPublisher() {
-        return publisher;
-    }
-
-    /**
-     * @param publisher the publisher to set
-     */
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    /**
-     * @return the attchpath
-     */
-    public String getAttchpath() {
-        return attchpath;
-    }
-
-    /**
-     * @param attchpath the attchpath to set
-     */
-    public void setAttchpath(String attchpath) {
-        this.attchpath = attchpath;
-    }
-    
-    
+       
 }

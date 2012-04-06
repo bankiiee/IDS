@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : studentUpdateProfile
     Created on : Sep 5, 2011, 11:05:50 PM
@@ -5,6 +7,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<sql:query var="item" dataSource="db">
+    SELECT * FROM usergroup limit 4
+</sql:query>
 
 <!DOCTYPE html>
 <html>
@@ -57,10 +63,9 @@
 							<label>ชั้นปีปัจจุบัน:</label>
                                                         <select name="currentyear">
                                                             <option value="0">โปรดระบุ</option>
-                                                            <option value="1">ชั้นปีที่ 1</option>
-                                                            <option value="2">ชั้นปีที่ 2</option>
-                                                            <option value="3">ชั้นปีที่ 3</option>
-                                                            <option value="4">ชั้นปีที่ 4</option>
+                                                            <c:forEach var="row" items="${item.rows}">
+                                                                <option value="${row.id}">${row.name}</option>
+                                                            </c:forEach>
                                                         </select>
 							<span class="error">This is an error</span>
 						</div>

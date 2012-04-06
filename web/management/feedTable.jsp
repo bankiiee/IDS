@@ -95,10 +95,10 @@
             <a onclick="showArticle(${item.id},'${item.topic}','${item.story}')">
                 <div class="newsDetail"  style="background-color: white">
                     <span id="${item.id}">
-                        <h3><img src="<%=ct%>/${item.attchpath}" height="80" width="80" onclick="showAttch('<%=ct%>/${item.attchpath}')"/>
+                        <h3><img src="<%=ct%>/attachpath" height="80" width="80" onclick="showAttch('<%=ct%>/attchpath')"/>
                             <b>${item.topic}</b></h3>
                             ${item.story}
-                            <p><b>ประกาศโดย:</b> ${item.publisher} <b>วันที่ประกาศ:</b> ${item.fromdate} 
+                            <p><b>ประกาศโดย:</b> ${item.userid} <b>วันที่ประกาศ:</b> ${item.senddate} 
                         <b>หมวดหมู่:</b> 
                         <sql:query var="result2" dataSource="db">
                             SELECT * from newstype where id = ${item.newstypeid};

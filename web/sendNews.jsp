@@ -11,13 +11,13 @@
 <link href="<%=ct%>/css/cssForSendNews.css" rel="stylesheet" type="text/css">
 
 <sql:query var="row" dataSource="db">
-    SELECT * FROM usergroup;
+    SELECT * FROM usergroup limit 5;
 </sql:query>
 <sql:query var="row2" dataSource="db">
     SELECT * FROM newstype;
 </sql:query>
 <sql:query var="row3" dataSource="db">
-    SELECT * FROM media;
+    SELECT * FROM inputmedia;
 </sql:query>
 <sql:query var="row4" dataSource="db">
     SELECT * FROM edunews;
@@ -41,7 +41,7 @@
     function eduSubTypeSelect(){
         var edutype = document.getElementById("edu").value;
         //        var edusubtype = document.getElementById("edusubtype");
-        alert(edutype);
+        console.log(edutype);
         if(edutype == 1){
             edu2.style.visibility = 'visible';
         }
@@ -55,7 +55,7 @@
             <table>
                 <tr>
                     <td style="width:40%;">หัวข้อข่าว</td>
-                    <td><input type="text" name="headline" value="" size="50%" placeholder="หัวข้อข่าวที่ต้องการประกาศ" autofocus="autofocus" /></td>
+                    <td><input type="text" name="topic" value="" size="50%" placeholder="หัวข้อข่าวที่ต้องการประกาศ" autofocus="autofocus" /></td>
 
                 </tr>
                 <tr>
@@ -75,11 +75,12 @@
                 </tr>
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
-                    <td><select name="forusergroupid">
-                            <c:forEach var="item" items="${row.rows}">
-                                <option value="${item.id}">${item.name}</option>
+                    <td>
+                             <c:forEach var="item" items="${row.rows}">
+<!--                                <option value="${item.id}">${item.name}</option>-->
+                                <input type="checkbox" name="forusergroupid" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
                             </c:forEach>
-                        </select>
+                      
                     </td>
 
                 </tr>
@@ -107,7 +108,7 @@
                 <tr >
                 <tr>
                     <td style="width:40%;">รับข่าวสารมาจากสื่อใด</td>
-                    <td><select name="mediaid">
+                    <td><select name="inputmediaid">
                             <c:forEach var="item" items="${row3.rows}">
                                 <option value="${item.id}">${item.name}</option>
                             </c:forEach>

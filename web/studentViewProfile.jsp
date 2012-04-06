@@ -14,6 +14,9 @@
 <sql:query var="result" dataSource="db">
     SELECT* FROM user where username like '${userid}'
 </sql:query>
+    <sql:query var="result2" dataSource="db">
+    SELECT * FROM usergroup limit 4
+</sql:query>
 
 <div class="wrapper">
     <c:forEach var="item" items="${result.rows}">
@@ -45,15 +48,14 @@
                                 </tr>
                                 <tr>
                                     <td><label>ชั้นปีปัจจุบัน(เก่า): </label>
-                                        <input type="text" name="showstatus" placeholder="" disabled="true" value="ชั้นปีที่ ${item.status}"/>
+                                        <input type="text" name="showstatus" placeholder="" disabled="true" value="ชั้นปีที่ ${item.usergroupid}"/>
 
                                     </td>
                                     <td><label id="textcurrentyear">ชั้นปีปัจจุบัน: <font style="color: RED">(*)</font></label><select name="currentyear" disabled="true" id="currentyear">
                                             <option value="0">โปรดระบุ</option>
-                                            <option value="1">ชั้นปีที่ 1</option>
-                                            <option value="2">ชั้นปีที่ 2</option>
-                                            <option value="3">ชั้นปีที่ 3</option>
-                                            <option value="4">ชั้นปีที่ 4</option>
+                                            <c:forEach var="row" items="${result2.rows}">
+                                                                <option value="${row.id}">${row.name}</option>
+                                                            </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
