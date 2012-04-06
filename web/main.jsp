@@ -66,7 +66,11 @@
                 var monthday    = now.getDate();
                 var year        = now.getFullYear();
             
-                document.getElementById("datetime").innerHTML = "Today is "+monthday+"/"+monthnumber+"/"+year+", and It's now "+hour+":"+minute+":"+second+"."+mil%20;
+            if(second%2==0){
+                          document.getElementById("datetime").innerHTML = "Today is "+monthday+"/"+monthnumber+"/"+year+", and It's now "+hour+":"+minute+":"+second;
+            }else{
+                                document.getElementById("datetime").innerHTML = "Today is "+monthday+"/"+monthnumber+"/"+year+", and It's now "+hour+" "+minute+" "+second;
+            }
             }
             
         </script>
@@ -263,8 +267,6 @@
             }
         </script>
 
-        <div class="" id="footer" style="text-align: right;">
-            <jsp:include page="footer.jsp"/>
-        </div>
+
     </body>
 </html>

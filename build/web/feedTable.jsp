@@ -68,7 +68,7 @@
 <c:choose>
     <c:when test="${param.pri != null}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid=${param.pri}  and status like 'active' order by priorityid desc;
+            select * from news n, news_has_usergroup h, usergroup u where n.id = h.newsid and u.id = h.usergroupid and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' and n.newstypeid = ${param.pri} order by priorityid asc limit 10;
         </sql:query>
     </c:when>
     <c:when test="${param.pri == 0}">
@@ -78,7 +78,7 @@
     </c:when>
     <c:otherwise>
         <sql:query var="result" dataSource="db">
-            SELECT * from news where  status like 'active'  order by priorityid desc;
+            select * from news n, news_has_usergroup h, usergroup u where n.id = h.newsid and u.id = h.usergroupid and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' order by priorityid asc limit 10;
         </sql:query>
     </c:otherwise>
 </c:choose>
