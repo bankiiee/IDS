@@ -63,19 +63,17 @@ public class GenXMLServlet extends HttpServlet {
             List list = new ArrayList();
             while (rs.next()) {
                 News n = new News();
-                n.setNewsid(rs.getInt(1));
-                n.setPublisher(rs.getString(2));
-                n.setHeadline(rs.getString(3));
-                n.setStory(rs.getString(4));
-                n.setFromdate(rs.getString(5));
-                n.setTodate(rs.getString(6));
-                n.setForusergroupid(rs.getInt(7));
-                n.setNewstypeid(rs.getInt(8));
-                n.setMediaid(rs.getInt(9));
-                n.setAttchpath(rs.getString(10));
-                n.setStatus(rs.getString(11));
-                n.setRemark(rs.getString(12));
-                n.setPriorityid(rs.getInt(13));
+                n.setId(rs.getInt("id"));
+                n.setUserid(rs.getInt("userid"));
+                n.setTopic(rs.getString("topic"));
+                n.setStory(rs.getString("story"));
+                n.setSenddate(rs.getString("senddate"));
+                n.setNewstypeid(rs.getInt("newstypeid"));
+                n.setInputmediaid(rs.getInt("inputmediaid"));
+                n.setStatus(rs.getString("status"));
+                n.setRemark(rs.getString("remark"));
+                n.setPriorityid(rs.getInt("priorityid"));
+                
                 list.add(n);
                 out.println(list.size());
                 out.println("Headline     " + rs.getString("topic"));
@@ -85,17 +83,17 @@ public class GenXMLServlet extends HttpServlet {
             xce.setSavedLocation(this.getServletContext().getRealPath(""));
             xce.runExample();
 
-            String sql2 = "select * from lecturer";
+            String sql2 = "select * from lecturer l, user u where l.id = u.id";
             ResultSet rs2 = stmt.executeQuery(sql2);
             List list2 = new ArrayList();
             while (rs2.next()) {
                 Lecturer l = new Lecturer();
-                l.setId(rs2.getInt(1));
-                l.setUsername(rs2.getString(2));
-                l.setFname(rs2.getString(3));
-                l.setLname(rs2.getString(4));
-                l.setRoom(rs2.getString(5));
-                l.setStatus(rs2.getString(6));
+                l.setId(rs2.getInt("id"));
+                l.setUsername(rs2.getString("username"));
+                l.setFname(rs2.getString("fname"));
+                l.setLname(rs2.getString("lname"));
+                l.setRoom(rs2.getString("room"));
+                l.setStatus(rs2.getString("status"));
                 list2.add(l);
             }
             XMLCreatorLecturer xcel = new XMLCreatorLecturer(list2);

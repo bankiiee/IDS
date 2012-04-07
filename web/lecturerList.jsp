@@ -16,7 +16,7 @@
 </script>
 <div>
     <sql:query var="item" dataSource="db">
-        select * from lecturer;
+        select * from lecturer l, user u where l.id = u.id;
     </sql:query>
 
         <center>

@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <div class ="wrapper"  >
     <sql:query var="result" dataSource="db">
-        SELECT * from admin;
+        SELECT * from admin  a, user u where a.id=u.id;
     </sql:query>
 
         <div style="margin-top: 50px;">

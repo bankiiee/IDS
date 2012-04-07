@@ -42,50 +42,54 @@ public class updateLecturerProfileServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Utility util = new Utility();
         try {
-            
+
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet updateStudentProfileServlet</title>");  
+            out.println("<title>Servlet updateStudentProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            
+
             String fname = request.getParameter("fname");
             System.out.println(fname);
             String lname = request.getParameter("lname");
             String room = request.getParameter("room");
-           
-            
-           Connection conn = (Connection) this.getServletContext().getAttribute("conn");
-           String sql = "insert into lecturer(username,fname,lname,room) values (?,?,?,?)";
-           PreparedStatement pstmt = conn.prepareStatement(sql);
-           pstmt.setString(1, session.getAttribute("userid")+"");
-           pstmt.setString(2, fname);
-           pstmt.setString(3, lname);
-           pstmt.setString(4,  room);
-          
-          
-           int success = pstmt.executeUpdate();
-           if(success == 1){
-               System.out.println("Update Success");
-               Statement stmt = conn.createStatement();
-               String sql2 = "select * from lecturer where username like '"+session.getAttribute("userid")+"'";
-               ResultSet rs = stmt.executeQuery(sql2);
-               while(rs.next()){
-                   session.setAttribute("id",rs.getInt("id") );
-               }
-               
-               out.println("<script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');</script>");
-               response.sendRedirect("lecturer/main.jsp?pupdate=success");
-           }else{
-               System.out.println("Update Failed");
-               out.println("<script type='text/javascript'>alert('ไม่สามารถอัพเดตข้อมูลประวัติได้ กรุณาตรวจสอบข้อมูลอีกครั้ง');</script>");
-           }
+
+
+            Connection conn = (Connection) this.getServletContext().getAttribute("conn");
+            String sql = "insert into user (username,fname,lname,usergroupid) values (?,?,?,5)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, session.getAttribute("userid") + "");
+            pstmt.setString(2, fname);
+            pstmt.setString(3, lname);
+
+
+
+            int success = pstmt.executeUpdate();
+            if (success == 1) {
+                Statement stmt = conn.createStatement();
+                String sql3 = "insert into lecturer (id, room, status) values ((select id from user where username like '" + session.getAttribute("userid") + "')," + room + ",'Invisible')";
+                if (stmt.executeUpdate(sql3) != 0) {
+                    System.out.println("Update Success");
+                    String sql2 = "select * from user where username like '" + session.getAttribute("userid") + "'";
+                    ResultSet rs = stmt.executeQuery(sql2);
+                    while (rs.next()) {
+                        session.setAttribute("id", rs.getInt("id"));
+                    }
+
+                    out.println("<script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');</script>");
+                    response.sendRedirect("lecturer/main.jsp?pupdate=success");
+                }
+
+            } else {
+                System.out.println("Update Failed");
+                out.println("<script type='text/javascript'>alert('ไม่สามารถอัพเดตข้อมูลประวัติได้ กรุณาตรวจสอบข้อมูลอีกครั้ง');</script>");
+            }
             out.println("</body>");
             out.println("</html>");
-            
+
         } catch (Exception ex) {
             Logger.getLogger(updateStudentProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {            
+        } finally {
             out.close();
         }
     }

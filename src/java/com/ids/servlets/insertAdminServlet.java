@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -51,18 +53,22 @@ public class insertAdminServlet extends HttpServlet {
 //
             Connection conn = (Connection) this.getServletContext().getAttribute("conn");
 
-            String sql = "insert into admin (fname,lname,username,password,remark) values (?,?,?,?,?)";
+            String sql = "insert into user (fname,lname,username,usergroupid, remark) values (?,?,?,6,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, fname);
             pstmt.setString(2, lname);
             pstmt.setString(3, username);
-            pstmt.setString(4, password);
-            pstmt.setString(5, remark);
+      
+            pstmt.setString(4, remark);
             
             if (pstmt.executeUpdate() > 0) {
-
-                response.sendRedirect("management/main.jsp?insert=true");
+                    String sql2 = "insert into admin (id,password) values ((select id from user where username like '"+username+"'),"+password+")";
+                    Statement stmt = conn.createStatement();
+                    int row_aff = stmt.executeUpdate(sql2);
+                    if(row_aff != 0){
+                        response.sendRedirect("management/main.jsp?insert=true");
                 out.println("<script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');</script>");
+                    }
             } else {
                 out.print("false");
             }

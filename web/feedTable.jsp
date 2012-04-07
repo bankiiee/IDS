@@ -68,7 +68,7 @@
 <c:choose>
     <c:when test="${param.pri != null}">
         <sql:query var="result" dataSource="db">
-            select * from news n, news_has_usergroup h, usergroup u where n.id = h.newsid and u.id = h.usergroupid and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' and n.newstypeid = ${param.pri} order by priorityid asc limit 10;
+            select * from news n, news_has_usergroup h  where n.id = h.newsid and h.usergroupid = (select id from usergroup where id = h.usergroupid) and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' and n.newstypeid = ${param.pri} order by priorityid asc limit 10;
         </sql:query>
     </c:when>
     <c:when test="${param.pri == 0}">
@@ -78,7 +78,7 @@
     </c:when>
     <c:otherwise>
         <sql:query var="result" dataSource="db">
-            select * from news n, news_has_usergroup h, usergroup u where n.id = h.newsid and u.id = h.usergroupid and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' order by priorityid asc limit 10;
+            select * from news n, news_has_usergroup h  where n.id = h.newsid and h.usergroupid = (select id from usergroup where id = h.usergroupid) and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' order by priorityid asc limit 10;
         </sql:query>
     </c:otherwise>
 </c:choose>
@@ -99,19 +99,21 @@
                             SELECT * FROM picture where newsid = ${item.id}
                         </sql:query>
                         <c:forEach var="picrow" items="${pic.rows}">
+                            
                             <img src="<%=ct%>/${picrow.path}" height="80" width="80" onclick="showAttch('<%=ct%>/${picrow.path}')"/>
 
                         </c:forEach>
+                           
                         <h3> <b>${item.topic}</b></h3>
-                        ${item.story}
+                        ${item.story} ${item.id}
                         <p><b>ประกาศโดย:</b>
                             <sql:query var="who" dataSource="db">
                                 SELECT * FROM user where id =  ${item.userid} 
                             </sql:query>
-                                <c:forEach var="whorow" items="${who.rows}">
-                                    ${whorow.fname} ${whorow.lname}
-                                </c:forEach>
-                            
+                            <c:forEach var="whorow" items="${who.rows}">
+                                ${whorow.fname} ${whorow.lname}
+                            </c:forEach>
+
                             <b>วันที่ประกาศ:</b> ${item.senddate} 
                             <b>หมวดหมู่:</b> 
                             <sql:query var="result2" dataSource="db">
@@ -120,7 +122,7 @@
                             <c:forEach var="row" items="${result2.rows}">
                                 ${row.name}
                             </c:forEach>
-                            
+
                     </span>
                 </div>
 

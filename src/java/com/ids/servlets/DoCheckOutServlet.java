@@ -47,7 +47,7 @@ public class DoCheckOutServlet extends HttpServlet {
            String username = (String) session.getAttribute("userid");
            Connection conn = (Connection)  this.getServletContext().getAttribute("conn");
            Statement stmt = conn.createStatement();
-           String sql = "update lecturer set status = 'Out-Of-Office', remark = '' where username like '"+username+"'";
+           String sql = "update lecturer set status = 'Out-Of-Office', remark = ''  where id = (select id from user where username like '"+username+"')";
            int result = stmt.executeUpdate(sql);
            if(result == 1){
                out.println("Success");

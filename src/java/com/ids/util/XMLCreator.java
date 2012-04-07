@@ -149,7 +149,7 @@ public class XMLCreator {
 
         Element itemEle = getDom().createElement("item");
         Element titleEle = getDom().createElement("title");
-        titleEle.setTextContent(n.getHeadline());
+        titleEle.setTextContent(n.getTopic());
         itemEle.appendChild(titleEle);
         //create author element and author text node and attach it to bookElement
         
@@ -158,14 +158,14 @@ public class XMLCreator {
         itemEle.appendChild(desc);
         
         Element linkEle = getDom().createElement("attachment");
-        linkEle.setTextContent(""+n.getAttchpath());
+        linkEle.setTextContent("");
         System.out.println();
         itemEle.appendChild(linkEle);
         Element guidEle = getDom().createElement("newsid");
-        guidEle.setTextContent(""+n.getNewsid());
+        guidEle.setTextContent(""+n.getId());
         itemEle.appendChild(guidEle);
         Element pubEle = getDom().createElement("pubDate");
-        pubEle.setTextContent(n.getFromdate());
+        pubEle.setTextContent(n.getSenddate());
         itemEle.appendChild(pubEle);
 //        //create title element and title text node and attach it to bookElement
 //        Element titleEle = dom.createElement("Date");

@@ -136,7 +136,7 @@
 
 <div style="width: 32%; float: left;"  >
     <sql:query var="result" dataSource="db">
-        SELECT id , name  from media;
+        SELECT id , name  from inputmedia;
     </sql:query>
     Media<br> 
     <form action="/IDS/addMediaServlet" method="GET">

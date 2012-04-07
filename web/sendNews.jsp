@@ -35,6 +35,11 @@
         edu2 =  document.getElementById("edu2");
 
         edu2.style.visibility = 'hidden';
+        
+          var time = new Date();
+        var timestr = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
+        console.log(timestr);
+        document.getElementById("datepicker").value = timestr;
     });
    
     
@@ -64,15 +69,15 @@
 
                 </tr>
                 <tr>
-                    <td style="width:40%;">วันที่เริ่มประกาศ</td>
+                    <td style="width:40%;">วันที่ประกาศ</td>
                     <td><input type="text" name="fromdate" value="2012-01-17" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
 
                 </tr>
-                <tr>
+<!--                <tr>
                     <td style="width:40%;">วันที่สิ้นสุดการประกาศ</td>
                     <td><input type="text" name="todate" value="2012-01-20" size="50%" placeholder="yyyy-mm-dd"  id="datepicker2"/></td>
 
-                </tr>
+                </tr>-->
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
                     <td>
@@ -96,7 +101,7 @@
 
                 </tr>
 
-                <tr  id="edu2">
+<!--                <tr  id="edu2">
                     <td style="width:40%;">ประเภทของข่าวการเรียนการสอน</td>
                     <td><select name="edunewstypeid">
                             <c:forEach var="item" items="${row4.rows}">
@@ -104,7 +109,7 @@
                             </c:forEach>
                         </select>
                     </td>
-                </tr>
+                </tr>-->
                 <tr >
                 <tr>
                     <td style="width:40%;">รับข่าวสารมาจากสื่อใด</td>

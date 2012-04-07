@@ -13,7 +13,7 @@
 <link href="<%=ct%>/css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
 
 <sql:query var="result" dataSource="db">
-    SELECT * FROM admin where id = '${param.id}'
+    SELECT * from admin  a, user u where a.id=u.id and a.id = ${param.id};
 </sql:query>
 
     <div class="wrapper">
@@ -34,15 +34,15 @@
                             <tbody>
                                 <tr>
                                     <td><label>ชื่อ: <font style="color: RED">(*)</font></label>
-                                        <input type="text" name="fname" id="fname" placeholder="" value="${fname}"  autofocus="autofocus"/></td>
+                                        <input type="text" name="fname" id="fname" placeholder="" value="${item.fname}"  autofocus="autofocus"/></td>
                                     <td><label>นามสกุล: <font style="color: RED">(*)</font></label>
-                                        <input type="text" name="lname" placeholder="" value="${lname}" disabled="true"/></td>
+                                        <input type="text" name="lname" placeholder="" value="${item.lname}" disabled="true"/></td>
                                 </tr>
                                 <tr>
                                     <td><label>Username: <font style="color: RED">(*)</font></label>
-                                        <input type="text" name="username" id="fname" placeholder="" value="${username}" disabled="true" autofocus="autofocus"/></td>
+                                        <input type="text" name="username" id="fname" placeholder="" value="${item.username}" disabled="true" autofocus="autofocus"/></td>
                                     <td><label>Password: <font style="color: RED">(*)</font></label>
-                                        <input type="password" name="password" placeholder="" value="${password}" disabled="true"/></td>
+                                        <input type="password" name="password" placeholder="" value="" disabled="true"/></td>
                                 </tr>
                                 
                             </tbody>

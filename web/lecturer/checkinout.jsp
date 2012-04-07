@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="<%=ct%>/css/cssForStudentViewProfilePage.css" rel="stylesheet" type="text/css">
 <sql:query var="result" dataSource="db">
-    SELECT DISTINCT * FROM lecturer where username like '${userid}'
+    SELECT DISTINCT * FROM user u, lecturer l where u.id = l.id and u.username = '${userid}'
 </sql:query>
 
 <!DOCTYPE html>

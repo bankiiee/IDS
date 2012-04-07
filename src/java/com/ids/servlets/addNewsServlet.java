@@ -52,15 +52,24 @@ public class addNewsServlet extends HttpServlet {
             String story = request.getParameter("story").trim();
             String senddate = request.getParameter("senddate");
             // String todate = request.getParameter("todate");
-            System.out.println((String) request.getParameter("forusergroupid"));
+            // System.out.println((String) request.getParameter("forusergroupid"));
             String[] forusergroupid = request.getParameterValues("forusergroupid");;
             int newstypeid = Integer.parseInt((String) request.getParameter("newstypeid"));
-            int edunewstypeid = Integer.parseInt(request.getParameter("edunewstypeid"));
+            int edunewstypeid  =0;
+            if(session.getAttribute("role").equals("student")){
+                edunewstypeid = 0;
+            }else{
+                            edunewstypeid = Integer.parseInt(request.getParameter("edunewstypeid"));
+            }
+            if (!session.getAttribute("role").equals("student")) {
+                edunewstypeid = Integer.parseInt(request.getParameter("edunewstypeid"));
+
+            }
 
             int inputmediaid = Integer.parseInt((String) request.getParameter("inputmediaid"));
             String attachment = request.getParameter("attachment");
             String escape_attch = attachment.replace("%20", "_");
-            String status;
+            String status = "";
             if (!session.getAttribute("role").equals("student") && !session.getAttribute("role").equals("lecturer")) {
                 status = "active";
             } else if (session.getAttribute("role").equals("lecturer") && edunewstypeid != 0) {
@@ -89,24 +98,31 @@ public class addNewsServlet extends HttpServlet {
             System.out.println(request.getRequestURL());
             System.out.println("Insert row: " + result);
             if (result) {
-                if (session.getAttribute("role").equals("student")) {
+                if (true) {
                     String sql = "select * from news order by id desc limit 1";
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(sql);
                     rs.next();
                     int newsid = rs.getInt("id");
                     int aff = 0;
+                    System.out.println(""+forusergroupid.length);
                     for (int i = 0; i < forusergroupid.length; i++) {
                         String sql2 = "insert into news_has_usergroup values (" + newsid + "," + Integer.parseInt(forusergroupid[i]) + ")";
                         aff += stmt.executeUpdate(sql2);
                         System.out.println("Row Affected " + aff);
+                        
                     }
                     if (aff == forusergroupid.length) {
                         System.out.println("Complete!");
-                        response.sendRedirect("main.jsp?v=6");
-                    } else {
-                        response.sendRedirect(session.getAttribute("role") + "/main.jsp?v=6");
+                        String sql3 = "insert into picture(newsid,path) values (" + newsid + ",'" + attachment + "')";
+                        int aff2 = stmt.executeUpdate(sql3);
+                        if (aff2 != 0 && session.getAttribute("role").equals("student")) {
+                            System.out.println("Pic Saved!");
+                            response.sendRedirect("main.jsp?v=6");
+                        } else {
+                            response.sendRedirect(session.getAttribute("role") + "/main.jsp");
 
+                        }
                     }
                 }
                 //RequestDispatcher rd = request.getRequestDispatcher("GenXMLServlet?page=main.jsp&v=6");

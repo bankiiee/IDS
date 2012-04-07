@@ -48,8 +48,8 @@ public class DoCheckInServlet extends HttpServlet {
            String username = (String) session.getAttribute("userid");
            Connection conn = (Connection)  this.getServletContext().getAttribute("conn");
            Statement stmt = conn.createStatement();
-           String sql = "update lecturer set status = 'In-Office', remark = \""+supdate+"\" where username like '"+username+"'";
-            System.out.println(sql);
+           String sql = "update lecturer set status = 'In-Office', remark = \""+supdate+"\" where id = (select id from user where username like '"+username+"')";
+           System.out.println(sql);
            int result = stmt.executeUpdate(sql);
            if(result == 1){
                System.out.println("Success");

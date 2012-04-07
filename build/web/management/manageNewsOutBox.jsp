@@ -17,11 +17,11 @@
 <%String ct = this.getServletContext().getContextPath();%>
 <!DOCTYPE html>
 
-<div style="width: 200%; margin-top: 0px;" >
+<div style="width: 200%; margin-top: 50px;" >
     <h1>Manage News Outbox</h1>
 
     <sql:query var="result" dataSource="db">
-        SELECT id,publisher,topic,story,fromdate,todate,forusergroupid,newstypeid,mediaid,attchpath,status,priorityid,remark from news where status = 'active' order by id desc;
+        SELECT * from news where status = 'active' order by id desc;
     </sql:query>
 
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
@@ -47,17 +47,17 @@
         <tbody>
             <c:forEach var="row" items="${result.rows}">
                 <tr class="">
-                    <td style="text-align: CENTER;"><c:out value="${row.publisher}"/></td>
+                    <td style="text-align: CENTER;"><c:out value="${row.userid}"/></td>
                     <td style="text-align: CENTER;"><a onClick="doedit(${row.id})"><c:out value="${row.topic}"/></a></td>
                                                        <!--                    <td style="text-align: CENTER;"><c:out value="${row.story}"/></td>-->
-                    <td style="text-align: CENTER; width: 75px;"><c:out value="${row.fromdate}"/></td>
+                    <td style="text-align: CENTER; width: 75px;"><c:out value="${row.senddate}"/></td>
 
                     <td style="text-align: CENTER;">
                         <sql:query var="item2" dataSource="db">
-                            select name from usergroup where id = ${row.forusergroupid};
+                            select * from news_has_usergroup where newsid = ${row.id}
                         </sql:query>
                         <c:forEach var="row2" items="${item2.rows}">
-                            ${row2.name}
+                            ${row2.usergroupid} 
                         </c:forEach>
 
                     </td>
@@ -72,7 +72,7 @@
                     </td>
                     <td style="text-align: CENTER;">
                         <sql:query var="item4" dataSource="db">
-                            select name from media where id = ${row.mediaid}
+                            select name from inputmedia where id = ${row.inputmediaid}
                         </sql:query>
                         <c:forEach var="row4" items="${item4.rows}">
                             ${row4.name}
@@ -83,8 +83,8 @@
                             <img src="<%=ct%>/${row.attchpath}" style="width: 48px;height: 48px;"/>
                         </a>
                     </td>
-                    <td style="text-align: LEFT;width: 50px;">Status :<b>${row.status}</b>
-                        <input type="radio" name="status" value="active" onclick="setSelectedActive(${row.id})"/>active
+                    <td style="text-align: LEFT;width: 50px;">
+                      <input type="radio" name="status" value="active" checked="checked"  onclick="setSelectedActive(${row.id})"/>   <b>active</b>
                         <input type="radio" name="status" value="inactive" onclick="setSelectedInActive(${row.id})"/>inactive
                     </td>
                     <td style="text-align: LEFT;">

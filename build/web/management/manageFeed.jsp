@@ -11,7 +11,7 @@
 <link href="<%=ct%>/css/cssForSendNews.css" rel="stylesheet" type="text/css">
 
 <sql:query var="row" dataSource="db">
-    SELECT * FROM usergroup;
+    SELECT * FROM usergroup limit 5;
 </sql:query>
 <sql:query var="row2" dataSource="db">
     SELECT * FROM newstype;
@@ -22,40 +22,37 @@
 <sql:query var="row4" dataSource="db">
     SELECT * FROM edunews;
 </sql:query>
-    <sql:query var="row5" dataSource="db">
+<sql:query var="row5" dataSource="db">
     SELECT * FROM priority;
 </sql:query>
-    
+
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <script type="text/javascript">
-    
     $(function() {
-        //alert(2);
         $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
         $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
         edu2 =  document.getElementById("edu2");
-        
+
         edu2.style.visibility = 'hidden';
         
-        var time = new Date();
+          var time = new Date();
         var timestr = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
         console.log(timestr);
         document.getElementById("datepicker").value = timestr;
-        
     });
    
     
     function eduSubTypeSelect(){
         var edutype = document.getElementById("edu").value;
         //        var edusubtype = document.getElementById("edusubtype");
-       console.log(edutype);
+        console.log(edutype);
         if(edutype == 1){
             edu2.style.visibility = 'visible';
         }
     }
 </script>
-<div class="form_wrapper" id="form_wrapper" >
+<div class="form_wrapper" id="form_wrapper" style="font-size: 16px; margin-top: 50px;">
     <h1>ส่งข่าวสารเข้าสู่ระบบ</h1>
     <h3>* กรุณากรอกข้อมูลตามความเป็นจริงและถูกต้อง *</h3>
     <form name="addFeed" action="<%=ct%>/addNewsServlet" method="GET" class="login active">
@@ -72,8 +69,8 @@
 
                 </tr>
                 <tr>
-                    <td style="width:40%;">วันที่ส่งประกาศ</td>
-                    <td><input type="text" name="senddate" value="" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
+                    <td style="width:40%;">วันที่ประกาศ</td>
+                    <td><input type="text" name="senddate" value="2012-01-17" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
 
                 </tr>
 <!--                <tr>
@@ -83,20 +80,19 @@
                 </tr>-->
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
-                    <td>&nbsp;&nbsp;
-<!--                        <select name="forusergroupid">-->
-                            <c:forEach var="item" items="${row.rows}">
+                    <td>
+                             <c:forEach var="item" items="${row.rows}">
 <!--                                <option value="${item.id}">${item.name}</option>-->
                                 <input type="checkbox" name="forusergroupid" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
                             </c:forEach>
-<!--                        </select>-->
+                      
                     </td>
 
                 </tr>
                 <tr>
                     <td style="width:40%;">ประเภทของข่าว</td>
                     <td><select name="newstypeid" onchange="eduSubTypeSelect()" id="edu">
-                            <option  value="0">----โปรดระบุ----</option>
+                            <option >----โปรดระบุ----</option>
                             <c:forEach var="item" items="${row2.rows}">
                                 <option value="${item.id}">${item.name}</option>
                             </c:forEach>
@@ -125,7 +121,7 @@
                     </td>
 
                 </tr>
-                
+
                 <tr>
                     <td style="width:40%;">ความสำคัญ</td>
                     <td><select name="priority">
@@ -136,21 +132,19 @@
                     </td>
 
                 </tr>
-                            <tr >
-                                <td>Attachments</td>
-                                <td>
-                                    
-                                    <input type="text" name="attachment" value="" id="attachment" onClick="openChild()" placeholder="Click to open upload window"/>	
-                                        
-                                    </div>
-                               </td>
-                
-<!--                            </tr>
-                            <tr>
-                                <td>News Status</td>
-                                <td>-->
+                <tr >
+                    <td>Attachments</td>
+                    <td>
+                        <label style="color:crimson">*ชื่อไฟล์ต้องไม่มีช่องว่าง*</label>
+                        <input type="text" name="attachment" value="" id="attachment" onClick="openChild()" placeholder="Click to open upload window"/>	
+                    </td>
+
+                    <!--                            </tr>
+                                                <tr>
+                                                    <td>News Status</td>
+                                                    <td>-->
                 <input type="hidden" name="status" value="inactive"/>
-                 <input type="hidden" name="attachment" value="0"/>
+                <input type="hidden" name="attachment" value="0"/>
                 <!--                </td>
                             </tr>-->
                 <tr>
@@ -163,9 +157,9 @@
         </fieldset>
     </form>
 </div>
-<script src="<%=ct%>/scripts/fileuploadChecker.js" type="text/javascript"></script>
+<script src="scripts/fileuploadChecker.js" type="text/javascript"></script>
 
-<script src="<%=ct%>/scripts/fileuploader.js" type="text/javascript"></script>
+<script src="scripts/fileuploader.js" type="text/javascript"></script>
 <script>
     
     function createUploader(){            

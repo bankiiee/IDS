@@ -95,23 +95,39 @@
             <a onclick="showArticle(${item.id},'${item.topic}','${item.story}')">
                 <div class="newsDetail"  style="background-color: white">
                     <span id="${item.id}">
-                        <h3><img src="<%=ct%>/attachpath" height="80" width="80" onclick="showAttch('<%=ct%>/attchpath')"/>
-                            <b>${item.topic}</b></h3>
-                            ${item.story}
-                            <p><b>ประกาศโดย:</b> ${item.userid} <b>วันที่ประกาศ:</b> ${item.senddate} 
-                        <b>หมวดหมู่:</b> 
-                        <sql:query var="result2" dataSource="db">
-                            SELECT * from newstype where id = ${item.newstypeid};
+                        <sql:query var="pic" dataSource="db">
+                            SELECT * FROM picture where newsid = ${item.id}
                         </sql:query>
-                        <c:forEach var="row" items="${result2.rows}">
-                            ${row.name}
+                        <c:forEach var="picrow" items="${pic.rows}">
+                            
+                            <img src="<%=ct%>/${picrow.path}" height="80" width="80" onclick="showAttch('<%=ct%>/${picrow.path}')"/>
+
                         </c:forEach>
-                            <b>ระดับ:</b> ${item.priorityid}
+                           
+                        <h3> <b>${item.topic}</b></h3>
+                        ${item.story} ${item.id}
+                        <p><b>ประกาศโดย:</b>
+                            <sql:query var="who" dataSource="db">
+                                SELECT * FROM user where id =  ${item.userid} 
+                            </sql:query>
+                            <c:forEach var="whorow" items="${who.rows}">
+                                ${whorow.fname} ${whorow.lname}
+                            </c:forEach>
+
+                            <b>วันที่ประกาศ:</b> ${item.senddate} 
+                            <b>หมวดหมู่:</b> 
+                            <sql:query var="result2" dataSource="db">
+                                SELECT * from newstype where id = ${item.newstypeid};
+                            </sql:query>
+                            <c:forEach var="row" items="${result2.rows}">
+                                ${row.name}
+                            </c:forEach>
+
                     </span>
                 </div>
 
             </a>
-         
+
 
         </c:forEach>
         <div class="newsDetail">
@@ -119,10 +135,8 @@
         </div>
     </ul>
 </div>
-   <div id="showAttch" style="">
-            </div>
-
-
+<div id="showAttch" style="">
+</div>
 
 
 <!--         <a href="http://twitter.com/home?status=Custom%20status%20here" target="_blank">Post to Twitter!</a>-->

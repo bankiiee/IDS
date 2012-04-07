@@ -25,7 +25,7 @@ public class mediaManage {
 
     public boolean addMedia(String name) {
         try {
-            String sqlCmd = "insert into media (name) values(?)";
+            String sqlCmd = "insert into inputmedia (name) values(?)";
             pstm = conn.prepareStatement(sqlCmd);
             pstm.setString(1, name);
             if (pstm.executeUpdate() > 0) {
@@ -42,7 +42,7 @@ public class mediaManage {
 
     public boolean delMedia(String id) {
         try {
-            String sqlCmd = "delete from media where id = ?";
+            String sqlCmd = "delete from inputmedia where id = ?";
             pstm = conn.prepareStatement(sqlCmd);
             pstm.setString(1, id);
             if (pstm.executeUpdate() > 0) {
