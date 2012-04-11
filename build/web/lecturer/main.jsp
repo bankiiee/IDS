@@ -57,6 +57,9 @@
         <sql:query var="result" dataSource="db">
             SELECT * from newstype
         </sql:query>
+            <sql:query var="lecturer" dataSource="db">
+            SELECT * from lecturer where id = ${id}
+        </sql:query>
     </head>
     <body>
         <div>
@@ -66,7 +69,7 @@
             <c:when test="${username != null}">
                 <c:choose>
                     <c:when test="${param.v == 999}">
-                        <jsp:include page="pageForDialog.jsp"/>
+                        <c:redirect url="updateProfile.jsp"/>
                     </c:when>
                     <c:otherwise>
                     </c:otherwise>
@@ -106,6 +109,15 @@
                             </ul>
 
                         </div>
+                         <h3><a href="##">ตรวจสอบสถานะอาจารย์</a></h3>
+                            <div>
+                                <ul>
+
+                                    <li><a href="main.jsp?v=91##">รายชื่ออาจารย์ที่มาคณะวันนี้</a></li>
+                                    
+                                </ul>
+
+                            </div>
 
                         <!--                        <h3><a href="#">ค้นหา</a></h3>
                                                 <div>
@@ -121,19 +133,21 @@
                 <div class="container">
 
                     <div  id="checkIn" style="font-size: 20px;margin-top: -50px;">
+                        <c:forEach var="lecturerrow" items="${lecturer.rows}">
+                      
                         <c:choose>
-                            <c:when test="${checkins == 'In-Office'}">
+                            <c:when test="${lecturerrow.status != 'ไม่ระบุ'}">
                                 <form action="<%=ct%>/DoCheckOutServlet" name="doCheckOut" >
-                                    สถานะของคุณ : <label style="color: blue;">${applicationScope['checkins']}</label> | <input type="button" onClick="var ans = confirm('สถานะของคุณจะไม่เป็นที่มองเห็นอีกต่อไป ยินยอม ?');if(ans){document.forms['doCheckOut'].submit();}" name="checkout" value="Check-Out!"/>
+                                    สถานะของคุณ : <label style="color: blue;">${lecturerrow.status}</label> | <input type="button" onClick="var ans = confirm('สถานะของคุณจะไม่เป็นที่มองเห็นอีกต่อไป ยินยอม ?');if(ans){document.forms['doCheckOut'].submit();}" name="checkout" value="Check-Out!"/>
                                     <input type="hidden" name="username" value="${userid}"/>
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                สถานะของคุณ : <label style="color: crimson;">Out-Of-Office</label> | 
+                                สถานะของคุณ : <label style="color: crimson;">ไม่ระบุ</label> | 
                                 <a href="main.jsp?v=0" ><input type="button" name="checkin" value="Check-In Now!"/></a>
                                 </c:otherwise>
                             </c:choose>
-
+  </c:forEach>
                     </div>
 
 
@@ -176,6 +190,11 @@
                          <c:when test="${param.v == 'rm'}">
                             <div class="container">
                                 <jsp:include page="readmoreNews.jsp"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${param.v == 91}">
+                            <div class="container">
+                                <jsp:include page="lecturerList.jsp"/>
                             </div>
                         </c:when>
                         <c:when test="">

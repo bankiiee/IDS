@@ -87,7 +87,7 @@
             <c:when test="${username != null}">
                 <c:choose>
                     <c:when test="${param.v == 999}">
-                        <jsp:include page="pageForDialog.jsp"/>
+                        <c:redirect url="updateProfile.jsp"/>
                     </c:when>
                     <c:otherwise>
                     </c:otherwise>
@@ -144,6 +144,15 @@
                                 </ul>
 
                             </div>
+                            <h3><a href="##">ตรวจสอบสถานะอาจารย์</a></h3>
+                            <div>
+                                <ul>
+
+                                    <li><a href="main.jsp?v=91##">รายชื่ออาจารย์ที่มาคณะวันนี้</a></li>
+                                    
+                                </ul>
+
+                            </div>
                             <!--                        <h3><a href="">จัดการแบบประเมิน</a></h3>
                                                     <div>
                                                         <ul>
@@ -169,7 +178,7 @@
 
                     </div>
                     <br>
-                    <div class="tweet" style="margin-top: 10px;"></div>
+<!--                    <div class="tweet" style="margin-top: 10px;"></div>-->
                 </div>
                 <div class="">
                     <div id="search-bar">
@@ -262,6 +271,11 @@
                         <c:when test="${param.v == 'rm'}">
                             <div class="container">
                                 <jsp:include page="readmoreNews.jsp"/>
+                            </div>
+                        </c:when>
+                            <c:when test="${param.v == 91}">
+                            <div class="container">
+                                <jsp:include page="lecturerList.jsp"/>
                             </div>
                         </c:when>
                         <c:otherwise>

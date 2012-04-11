@@ -39,8 +39,19 @@
                                             <input type="text" name="room" placeholder="" disabled="true" value="${item.room}"/>
                                         </td>
                                         <td>
-                                            <label>สถานะของท่าน: </label>                                          
-                                            <input type="text" name="supdate" placeholder="I'm out to lunch" autofocus="autofocus"/>
+                                            <label>สถานะของท่าน: </label> 
+                                            <select name="status">
+                                                <option value ="ไม่ระบุ">ไม่ระบุ</option>
+                                                <option value ="In-Office">In-Office</option>
+                                                <option value ="Out-of-Office">Out-of-Office</option>
+                                                <option value ="Out to Lunch">Out to Lunch</option>
+                                                <option value ="Be Back Soon">Be Back Soon</option>
+                                                <option value ="Do Not Disturb">Do Not Disturb</option>
+                                                <option value ="On Leave">On Leave</option>
+                                                <option value ="Meeting">Meeting</option>
+                                                <option value ="In Class">In Class</option>
+                                            </select>
+                                            
 
                                         </td>
                                     </tr>
@@ -53,14 +64,9 @@
 
                         </div>
                         <div class="bottom">
-                            <c:choose>
-                                <c:when test="${row.status != 'In-Office'}">
+                            
                                     <input type="button" value="Check-In Now!"  name="checkin" onclick="doSubmit()" ></input>
-                                </c:when>
-                                <c:otherwise>
-                                    <input type="button" value="Check-In Now!"  name="checkin" onclick="doSubmit()" ></input>
-                                </c:otherwise>
-                            </c:choose>
+                               
 <!--                            <div class="remember"><input type="checkbox" /><span>ข้อมูลถูกต้อง</span></div>-->
                             <div class="clear"></div>
                         </div>

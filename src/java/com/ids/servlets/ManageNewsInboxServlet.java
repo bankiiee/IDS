@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,11 @@ public class ManageNewsInboxServlet extends HttpServlet {
          String id = request.getParameter("id");
          //   out.println("News ID is "+id);
          if(mode.equalsIgnoreCase("active")){
-             String sql1 = "update news set status = 'active' where id = "+id;
+             Calendar c = Calendar.getInstance();
+             //System.out.println(c.get(c.DAY_OF_MONTH) +"-"+c.get(c.MONTH)+"-"+c.get(c.YEAR));
+             String df =  c.get(c.YEAR)+"-"+c.get(c.MONTH)+"-"+c.get(c.DAY_OF_MONTH);
+             System.out.println("Post Date : "+df);
+             String sql1 = "update news set status = 'active', senddate = '"+df+"' where id = "+id;
              Statement stmt = conn.createStatement();
              int row_affected = stmt.executeUpdate(sql1);
              if(row_affected >0){

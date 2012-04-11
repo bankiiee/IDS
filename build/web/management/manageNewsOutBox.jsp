@@ -33,7 +33,7 @@
                 <th style='width: 100px;'>Publisher</th>
                 <th style="width: 250px">Headline</th>
                 <!--                <th>Story</th>-->
-                <th>Send Date</th>
+                <th>Post Date</th>
                 <th>User Group ID</th>
                 <th>News Type ID</th>
                 <th>Media ID</th>
@@ -84,7 +84,7 @@
                         </a>
                     </td>
                     <td style="text-align: LEFT;width: 50px;">
-                      <input type="radio" name="status" value="active" checked="checked"  onclick="setSelectedActive(${row.id})"/>   <b>active</b>
+                        <input type="radio" name="status" value="active" checked="checked"  disabled="true" onclick="setSelectedActive(${row.id})"/>   <b>active</b>
                         <input type="radio" name="status" value="inactive" onclick="setSelectedInActive(${row.id})"/>inactive
                     </td>
                     <td style="text-align: LEFT;">
@@ -113,7 +113,7 @@
 
 <script type="text/javascript">
     function doedit(id){
-             var returnV = window.showModalDialog("showNewsPage.jsp?newsid="+id,"mywindow","width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0");
+             var returnV = window.showModalDialog("toLCD.jsp?newsid="+id,"mywindow","");
              if (returnV == 1){
                      window.location.reload();
              }

@@ -172,6 +172,10 @@
         <servlet-name>deleteNewsServlet</servlet-name>
         <servlet-class>com.ids.servlets.deleteNewsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>toLCDServlet</servlet-name>
+        <servlet-class>com.ids.servlets.toLCDServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -339,6 +343,10 @@
     <servlet-mapping>
         <servlet-name>deleteNewsServlet</servlet-name>
         <url-pattern>/deleteNewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>toLCDServlet</servlet-name>
+        <url-pattern>/toLCDServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,7 +11,7 @@
 <link href="<%=ct%>/css/cssForSendNews.css" rel="stylesheet" type="text/css">
 
 <sql:query var="row" dataSource="db">
-    SELECT * FROM usergroup limit 5;
+    SELECT * FROM usergroup ;
 </sql:query>
 <sql:query var="row2" dataSource="db">
     SELECT * FROM newstype;
@@ -36,7 +36,7 @@
 
         edu2.style.visibility = 'hidden';
         
-          var time = new Date();
+        var time = new Date();
         var timestr = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
         console.log(timestr);
         document.getElementById("datepicker").value = timestr;
@@ -73,19 +73,22 @@
                     <td><input type="text" name="senddate" value="2012-01-17" size="50%" placeholder="yyyy-mm-dd"  id="datepicker"/></td>
 
                 </tr>
-<!--                <tr>
-                    <td style="width:40%;">วันที่สิ้นสุดการประกาศ</td>
-                    <td><input type="text" name="todate" value="2012-01-20" size="50%" placeholder="yyyy-mm-dd"  id="datepicker2"/></td>
-
-                </tr>-->
+                <!--                <tr>
+                                    <td style="width:40%;">วันที่สิ้นสุดการประกาศ</td>
+                                    <td><input type="text" name="todate" value="2012-01-20" size="50%" placeholder="yyyy-mm-dd"  id="datepicker2"/></td>
+                
+                                </tr>-->
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
                     <td>
-                             <c:forEach var="item" items="${row.rows}">
+                        <c:forEach var="item" items="${row.rows}">
 <!--                                <option value="${item.id}">${item.name}</option>-->
-                                <input type="checkbox" name="forusergroupid" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
-                            </c:forEach>
-                      
+                            <input type="checkbox" name="forusergroupid" id="uid${item.id}" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
+                        </c:forEach>
+                        <br> <input type="radio" name="all" value="Check all" onclick="checkAll()"/>Check All
+                        <input type="radio" name="all" value="Uncheck all" onclick="uncheckAll()"/>Uncheck All
+
+
                     </td>
 
                 </tr>
@@ -187,4 +190,15 @@
         window.returnValue = retval;
         document.getElementById("attachment").value= window.returnValue;
     }
+    function checkAll(){
+        // alert(1);
+        for(var i = 1;i <=8;i++){
+            document.getElementById("uid"+i).checked = true;
+        }
+    }
+    function uncheckAll(){
+        // alert(1);
+        for(var i = 1;i <=8;i++){
+            document.getElementById("uid"+i).checked = false;
+        }    }
 </script>  

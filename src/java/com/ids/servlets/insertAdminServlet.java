@@ -41,9 +41,7 @@ public class insertAdminServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Utility util = new Utility();
 
-        String fname = request.getParameter("fname");
-        String lname = request.getParameter("lname");
-        String username = request.getParameter("username");
+       int userid = Integer.parseInt(request.getParameter("userid"));
         String password = request.getParameter("password");
         String remark = request.getParameter("remark");
         
@@ -53,25 +51,15 @@ public class insertAdminServlet extends HttpServlet {
 //
             Connection conn = (Connection) this.getServletContext().getAttribute("conn");
 
-            String sql = "insert into user (fname,lname,username,usergroupid, remark) values (?,?,?,6,?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, fname);
-            pstmt.setString(2, lname);
-            pstmt.setString(3, username);
-      
-            pstmt.setString(4, remark);
             
-            if (pstmt.executeUpdate() > 0) {
-                    String sql2 = "insert into admin (id,password) values ((select id from user where username like '"+username+"'),"+password+")";
+                    String sql2 = "insert into admin (id,password) values ("+userid+","+password+")";
                     Statement stmt = conn.createStatement();
                     int row_aff = stmt.executeUpdate(sql2);
                     if(row_aff != 0){
                         response.sendRedirect("management/main.jsp?insert=true");
                 out.println("<script type='text/javascript'>alert('ข้อมูลปรับปรุงเรียบร้อยแล้ว');</script>");
                     }
-            } else {
-                out.print("false");
-            }
+          
 //            
 //             
         } catch (SQLException ex) {

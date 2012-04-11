@@ -105,7 +105,7 @@
                         </c:forEach>
                            
                         <h3> <b>${item.topic}</b></h3>
-                        ${item.story} ${item.id}
+                        ${item.story} 
                         <p><b>ประกาศโดย:</b>
                             <sql:query var="who" dataSource="db">
                                 SELECT * FROM user where id =  ${item.userid} 

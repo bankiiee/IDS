@@ -87,7 +87,7 @@
             <c:when test="${username != null}">
                 <c:choose>
                     <c:when test="${param.v == 999}">
-                        <jsp:include page="pageForDialog.jsp"/>
+                        <c:redirect url="studentUpdateProfile.jsp"/>
                     </c:when>
                     <c:when test="${param.refresh == 'true'}">
                         <script>
