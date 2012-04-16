@@ -68,6 +68,9 @@ public class addNewsServlet extends HttpServlet {
 
             int inputmediaid = Integer.parseInt((String) request.getParameter("inputmediaid"));
             String attachment = request.getParameter("attachment");
+            if(attachment.isEmpty()){
+                attachment = "attachments/News.png";
+            }
             String escape_attch = attachment.replace("%20", "_");
             String status = "";
             if (!session.getAttribute("role").equals("student") && !session.getAttribute("role").equals("lecturer")) {

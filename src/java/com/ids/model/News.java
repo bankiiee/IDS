@@ -21,6 +21,7 @@ public class News {
     private String status;
     private Integer priorityid;
     private String remark;
+    private String path;
 
     /**
      * @return the userid
@@ -200,6 +201,20 @@ public class News {
      */
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    /**
+     * @return the path
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * @param path the path to set
+     */
+    public void setPath(String path) {
+        this.path = path;
     }
 
     /**

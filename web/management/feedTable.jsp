@@ -48,7 +48,7 @@
                 "Share to Facebook": function() {
 //                    var status = window.showModalDialog("http://www.facebook.com/sharer.php?u="+window.location.href+"&amp;t="+topic+"<br>"+story, 'popup');
                 //  alert(topic);
-                   window.location.href = '../sharefb.jsp?topic='+topic+"&story="+story;
+                   window.location.href = '<%=ct%>/sharefb.jsp?topic='+topic+"&story="+story;
                    $( this ).dialog( "close" );
                 },
                 "Share to Twitter": function() {
@@ -68,17 +68,17 @@
 <c:choose>
     <c:when test="${param.pri != null}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid=${param.pri}  and status like 'active' order by priorityid desc;
+            SELECT * from news  where newstypeid=${param.pri}  and status like 'active' order by priorityid asc, senddate desc;
         </sql:query>
     </c:when>
     <c:when test="${param.pri == 0}">
         <sql:query var="result" dataSource="db">
-            SELECT * from news  where newstypeid = 5 and status like 'active'  order by priorityid desc;
+            SELECT * from news  where newstypeid = 5 and status like 'active'  order by priorityid asc, senddate desc;
         </sql:query>
     </c:when>
     <c:otherwise>
         <sql:query var="result" dataSource="db">
-            SELECT * from news where  status like 'active'  order by priorityid desc;
+            SELECT * from news where  status like 'active'  order by priorityid asc, senddate desc;
         </sql:query>
     </c:otherwise>
 </c:choose>

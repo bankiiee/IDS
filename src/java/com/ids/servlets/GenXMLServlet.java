@@ -44,6 +44,7 @@ public class GenXMLServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=TIS-620");
+    
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
 
@@ -74,9 +75,16 @@ public class GenXMLServlet extends HttpServlet {
                 n.setRemark(rs.getString("remark"));
                 n.setPriorityid(rs.getInt("priorityid"));
                 
+                String sql11 = "select * from picture where newsid = "+n.getId();
+                Statement stmt2 = conn.createStatement();
+                ResultSet result2 = stmt2.executeQuery(sql11);
+                result2.next();
+                n.setPath(result2.getString("path"));
+                
+                
                 list.add(n);
                 out.println(list.size());
-                out.println("Headline     " + rs.getString("topic"));
+               // out.println("Headline     " + rs.getString("topic"));
 
             }
             XMLCreator xce = new XMLCreator(list);

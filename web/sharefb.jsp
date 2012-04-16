@@ -5,14 +5,14 @@
     Author     : bankiiee
 --%>
 
-<%@page contentType="text/html" pageEncoding="TIS-620"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
  <div id="fb-root">
      <label id="contentfb">${param.topic}<br>${param.story}</label>
  </div>
       <script>
           var content = document.getElementById("contentfb").textContent;
-          alert(content);
+          //alert(content);
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '225348954190713',

@@ -26,7 +26,17 @@
         <c:forEach var="row" items="${item.rows}">
             <center><h2 style="color: lightseagreen">${row.topic}</h2></center>
             <p style="font-size: 16px;">${row.story}</p>
-            <p>Attachment :<a onclick="showPic('<%=ct%>/${row.attchpath}')"> <img src="<%=ct%>/${row.attchpath}"  id="pic"/></a></p>
+            <p>Attachment :
+                  <sql:query var="item2" dataSource="db">
+                            SELECT * FROM picture where newsid = ${row.id}
+                        </sql:query>
+
+                            <c:forEach var="row2" items="${item2.rows}">
+                                 <a onClick="showPic('<%=ct%>/${row2.path}')">
+                            <img src="<%=ct%>/${row2.path}" style="width: 48px;height: 48px;"/>
+                        </a>
+                            </c:forEach>
+                
         </c:forEach>
 </div>
 <div id="showPic"></div>

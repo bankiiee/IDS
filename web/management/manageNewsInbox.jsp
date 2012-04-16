@@ -47,7 +47,14 @@
         <tbody>
             <c:forEach var="row" items="${result.rows}">
                 <tr class="">
-                    <td style="text-align: CENTER;"><c:out value="${row.userid}"/></td>
+                    <td style="text-align: CENTER;">
+                        <sql:query var="pub" dataSource="db">
+                            SELECT * FROM user where id = ${row.userid}
+                        </sql:query>
+                        <c:forEach var="pubrow" items="${pub.rows}">
+                            ${pubrow.fname} ${pubrow.lname}
+                        </c:forEach>
+                    </td>
                     <td style="text-align: CENTER;"><a onClick="doedit(${row.id})"><c:out value="${row.topic}"/></a></td>
                                                        <!--                    <td style="text-align: CENTER;"><c:out value="${row.story}"/></td>-->
                     <td style="text-align: CENTER; width: 75px;"><c:out value="${row.senddate}"/></td>
@@ -77,11 +84,20 @@
                         <c:forEach var="row4" items="${item4.rows}">
                             ${row4.name}
                         </c:forEach>
+                            
+                           
+                            
                     </td>
                     <td style="text-align: CENTER;">
-                        <a onClick="showPic('<%=ct%>/${row.attchpath}')">
-                            <img src="<%=ct%>/${row.attchpath}" style="width: 48px;height: 48px;"/>
+                         <sql:query var="item5" dataSource="db">
+                            select * from picture where newsid = ${row.id}
+                        </sql:query>
+                        <c:forEach var="pic" items="${item5.rows}">
+                             <a onClick="showPic('<%=ct%>/${pic.path}')">
+                            <img src="<%=ct%>/${pic.path}" style="width: 48px;height: 48px;"/>
                         </a>
+                        </c:forEach>
+                       
                     </td>
                     <td style="text-align: LEFT;width: 50px;">
                         <input type="radio" name="status" value="active"  onclick="setSelectedActive(${row.id})"/>active

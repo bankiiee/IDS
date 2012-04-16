@@ -11,7 +11,7 @@
 <link href="<%=ct%>/css/cssForSendNews.css" rel="stylesheet" type="text/css">
 
 <sql:query var="row" dataSource="db">
-    SELECT * FROM usergroup limit 5;
+    SELECT * FROM usergroup;
 </sql:query>
 <sql:query var="row2" dataSource="db">
     SELECT * FROM newstype;
@@ -81,11 +81,14 @@
                 <tr>
                     <td style="width:40%;">กลุ่มผู้รับข่าวสาร</td>
                     <td>
-                             <c:forEach var="item" items="${row.rows}">
+                        <c:forEach var="item" items="${row.rows}">
 <!--                                <option value="${item.id}">${item.name}</option>-->
-                                <input type="checkbox" name="forusergroupid" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
-                            </c:forEach>
-                      
+                            <input type="checkbox" name="forusergroupid" id="uid${item.id}" value="${item.id}" style="margin-left: 20px;">${item.name}</input>
+                        </c:forEach>
+                        <br> <input type="radio" name="all" value="Check all" onclick="checkAll()"/>Check All
+                        <input type="radio" name="all" value="Uncheck all" onclick="uncheckAll()"/>Uncheck All
+
+
                     </td>
 
                 </tr>
@@ -187,4 +190,15 @@
         window.returnValue = retval;
         document.getElementById("attachment").value= window.returnValue;
     }
+     function checkAll(){
+        // alert(1);
+        for(var i = 1;i <=8;i++){
+            document.getElementById("uid"+i).checked = true;
+        }
+    }
+    function uncheckAll(){
+        // alert(1);
+        for(var i = 1;i <=8;i++){
+            document.getElementById("uid"+i).checked = false;
+        }    }
 </script>  

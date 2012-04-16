@@ -173,7 +173,7 @@ public class MobileDoLoginServlet extends HttpServlet {
                     } else if (role.equals("lecturer") && !username.startsWith("it")) {
                         try {
                             conn = (Connection) this.getServletContext().getAttribute("conn");
-                            String sql = "select * from lecturer  where username = '" + username + "'";
+                            String sql = "select * from user  where username = '" + username + "'";
                             Statement stmt = conn.createStatement();
                             ResultSet rs = stmt.executeQuery(sql);
                             if (rs.next()) {

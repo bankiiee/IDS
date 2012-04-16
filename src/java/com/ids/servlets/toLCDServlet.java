@@ -36,40 +36,44 @@ public class toLCDServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         String remark = request.getParameter("remark");
-        
+
         String idtr = request.getParameter("id");
         Integer newsid = Integer.parseInt(idtr);
-        
-          String attachment = request.getParameter("attachment");
-          String escape_attch = attachment.replace("%20", "_");
-        
+        String path = request.getParameter("attachment");
+
+        String attachment = request.getParameter("attachment");
+        String escape_attch = attachment.replace("%20", "_");
+
         try {
-           
-           Connection conn = (Connection) this.getServletContext().getAttribute("conn");
-            String sql = "update news set remark = ? where id = ?";
+
+            Connection conn = (Connection) this.getServletContext().getAttribute("conn");
+            String sql = "update picture set path = ? where newsid = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-           
-            pstmt.setString(1, remark);
-            
+
+            pstmt.setString(1, path);
+//            pstmt.setString(2,remark);
             pstmt.setInt(2, newsid);
-           
+
             if (pstmt.executeUpdate() > 0) {
+                String sql2 = "update news set remark = ? where id = ?";
+                pstmt = conn.prepareStatement(sql2);
+                pstmt.setString(1, remark);
+                pstmt.setInt(2, newsid);
+                if (pstmt.executeUpdate()>0) {
+                    //response.sendRedirect("management/main.jsp?v=82");
 
-                //response.sendRedirect("management/main.jsp?v=82");
+                    out.println("<script type='text/javascript'>alert('ส่งข้อมูลเรียบร้อยแล้ว');</script>");
+                    //out.println("<script type='text/javascript'>parent.Windows.refresh();</script>");
+                    out.println("<script type='text/javascript'>self.window.close();</script>");
+                }
 
-                out.println("<script type='text/javascript'>alert('ส่งข้อมูลเรียบร้อยแล้ว');</script>");
-                //out.println("<script type='text/javascript'>parent.Windows.refresh();</script>");
-                out.println("<script type='text/javascript'>self.window.close();</script>");
-
-
-            }
-            else {
+            } else {
                 System.out.println("Update Failed");
                 out.println("<script type='text/javascript'>alert('ไม่สามารถอัพเดตข้อมูลประวัติได้ กรุณาตรวจสอบข้อมูลอีกครั้ง');</script>");
             }
-        } finally {            
+        } finally {
             out.close();
         }
     }

@@ -47,6 +47,7 @@
 
                 <div class="wrapper">
                     <h1>IDS Applicaton System</h1>
+                    <h1>Mode Root Admin</h1>
                     <h2>กรุณา Login เพื่อทำการเข้าใช้ระบบครับ</h2>
                     <div class="content">
                         <div id="form_wrapper" class="form_wrapper">					

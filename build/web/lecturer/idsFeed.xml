@@ -7,38 +7,59 @@
         <lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>
         <pubDate>Mon, 06 Sep 2010 00:01:00 +0000 </pubDate>
         <item>
+            <title>ยกเลิิกคลาสไมโครคอนโทรลเลอร์รอบที่สาม</title>
+            <description>ยกเลิกครับผม</description>
+            <attachment>attachments/News.png</attachment>
+            <newsid>72</newsid>
+            <pubDate>2012-04-12</pubDate>
+        </item>
+        <item>
+            <title>นักศึกษาชนะเลิศ FA Cup</title>
+            <description>ปีสี่ ชนะเลิศ FA Cup</description>
+            <attachment>attachments/newspic4.jpg</attachment>
+            <newsid>71</newsid>
+            <pubDate>2012-04-12</pubDate>
+        </item>
+        <item>
+            <title>ข่าวย้ายห้องสอบวิชา Mobile</title>
+            <description>ย้ายจากห้อง m03 เป็น m21</description>
+            <attachment>attachments/News.png</attachment>
+            <newsid>70</newsid>
+            <pubDate>2012-04-12</pubDate>
+        </item>
+        <item>
+            <title>ยกเลืกคลาส PCN SEC2</title>
+            <description>เนื่องจากแอร์ไม่ทำงานครับ</description>
+            <attachment>attachments/News.png</attachment>
+            <newsid>69</newsid>
+            <pubDate>2012-03-12</pubDate>
+        </item>
+        <item>
+            <title>ย้ายห้องเรียน MIS</title>
+            <description>ย้ายไปห้อง 203</description>
+            <attachment>attachments/News.png</attachment>
+            <newsid>67</newsid>
+            <pubDate>2012-04-12</pubDate>
+        </item>
+        <item>
+            <title>ข่าวทดสอบรอบที่ล้านสอง</title>
+            <description>สองสองสองสองสองสองสอง</description>
+            <attachment>undefined</attachment>
+            <newsid>64</newsid>
+            <pubDate>2012-03-11</pubDate>
+        </item>
+        <item>
             <title>มีฟุตบอลคณะ</title>
             <description>รับบริจาคเลือด พร้อมเตะฟุตบอลการกุศลแลกเลือด</description>
-            <attachment/>
+            <attachment>attachments/newspic5.jpg</attachment>
             <newsid>63</newsid>
             <pubDate>2012-03-07</pubDate>
         </item>
         <item>
             <title>ยกเลิกคลาส ไมโคร</title>
             <description>ยกเลิกคลาสไมโครปีสี่</description>
-            <attachment/>
+            <attachment>attachments/News.png</attachment>
             <newsid>62</newsid>
-            <pubDate>2012-03-07</pubDate>
-        </item>
-        <item>
-            <title>test</title>
-            <description/>
-            <attachment/>
-            <newsid>61</newsid>
-            <pubDate>2012-03-07</pubDate>
-        </item>
-        <item>
-            <title>weterwt</title>
-            <description>ewtwe</description>
-            <attachment/>
-            <newsid>60</newsid>
-            <pubDate>2012-03-07</pubDate>
-        </item>
-        <item>
-            <title>ต้องการแลกเปลี่ยนตัวประกัน</title>
-            <description>ตามนั้น</description>
-            <attachment/>
-            <newsid>59</newsid>
             <pubDate>2012-03-07</pubDate>
         </item>
     </channel>

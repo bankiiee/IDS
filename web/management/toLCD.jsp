@@ -53,7 +53,7 @@
                 SELECT * FROM newstype;
             </sql:query>
             <sql:query var="rowmedia" dataSource="db">
-                SELECT * FROM media;
+                SELECT * FROM inputmedia;
             </sql:query>
             <sql:query var="rowedunews" dataSource="db">
                 SELECT * FROM edunews;
@@ -152,7 +152,7 @@
 
 
                     <h1>ส่งข้อมูลข่าวสารสู่จอ LCD</h1>
-                    <h3>* กรุณากรอกข้อมูลตามความเป็นจริงและถูกต้อง *</h3>
+<!--                    <h3>* กรุณากรอกข้อมูลตามความเป็นจริงและถูกต้อง *</h3>-->
 
 
                     <c:forEach var="row" items="${item.rows}">
@@ -175,7 +175,13 @@
                             <td>Attachments</td>
                             <td>
                                 <label style="color:crimson">*ชื่อไฟล์ต้องไม่มีช่องว่าง*</label>
-                                <input type="text" name="attachment" value="" id="attachment" onClick="openChild()" placeholder="Click to open upload window"/>	
+                                <sql:query var="pic" dataSource="db">
+                                    select * from picture where newsid = ${row.id}
+                                </sql:query>
+                                <c:forEach var="picrow" items="${pic.rows}">
+                                     <input type="text" name="attachment" value="${picrow.path}" id="attachment" onClick="openChild()" placeholder="Click to open upload window"/>	
+
+                                </c:forEach>
                             </td>
                         </table>
                         <div class="">

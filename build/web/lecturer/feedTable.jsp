@@ -48,7 +48,7 @@
                 "Share to Facebook": function() {
                     //                    var status = window.showModalDialog("http://www.facebook.com/sharer.php?u="+window.location.href+"&amp;t="+topic+"<br>"+story, 'popup');
                     //  alert(topic);
-                    window.location.href = '../sharefb.jsp?topic='+topic+"&story="+story;
+                    window.location.href = '<%=ct%>/sharefb.jsp?topic='+topic+"&story="+story;
                     $( this ).dialog( "close" );
                 },
                 "Share to Twitter": function() {

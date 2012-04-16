@@ -158,7 +158,7 @@ public class XMLCreator {
         itemEle.appendChild(desc);
         
         Element linkEle = getDom().createElement("attachment");
-        linkEle.setTextContent("");
+        linkEle.setTextContent(n.getPath());
         System.out.println();
         itemEle.appendChild(linkEle);
         Element guidEle = getDom().createElement("newsid");

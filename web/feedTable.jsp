@@ -48,7 +48,7 @@
                 "Share to Facebook": function() {
                     //                    var status = window.showModalDialog("http://www.facebook.com/sharer.php?u="+window.location.href+"&amp;t="+topic+"<br>"+story, 'popup');
                     //  alert(topic);
-                    window.location.href = '../sharefb.jsp?topic='+topic+"&story="+story;
+                    window.location.href = '<%=ct%>/sharefb.jsp?topic='+topic+"&story="+story;
                     $( this ).dialog( "close" );
                 },
                 "Share to Twitter": function() {
@@ -78,7 +78,7 @@
     </c:when>
     <c:otherwise>
         <sql:query var="result" dataSource="db">
-            select * from news n, news_has_usergroup h  where n.id = h.newsid and h.usergroupid = (select id from usergroup where id = h.usergroupid) and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' order by priorityid asc limit 10;
+            select * from news n, news_has_usergroup h  where n.id = h.newsid and h.usergroupid = (select id from usergroup where id = h.usergroupid) and h.usergroupid = (select usergroupid from user where id = ${id}) and n.status like 'active' order by priorityid asc, senddate desc limit 10;
         </sql:query>
     </c:otherwise>
 </c:choose>
